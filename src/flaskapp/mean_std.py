@@ -1,7 +1,8 @@
-from get_csv import time, state
 from collections import Counter
 from cmath import rect, phase
 from math import sqrt, radians, degrees
+import pandas as pd
+import os
 
 
 def to_angle(time):
@@ -60,7 +61,22 @@ def mean_time(times):
     else:
         return 'No data'
 
-def time_val_of_state(State):
+def get_csv(userid):
+    owner_id = int(userid) 
+    if owner_id >= 30064:
+        csv_file = "hs_g73_m08/hs_" + str(owner_id) + "_m08_0903_1356.csv"   
+    else:
+        csv_file = "hs_g73_m08/hs_" + str(owner_id) + "_m08_0903_1355.csv"
+    if os.path.isfile(csv_file):
+        data = pd.read_csv(csv_file, encoding='cp949' ,index_col=0)
+        return data
+    else:
+        return 'No User'
+
+def time_val_of_state(userid, State):
+    data = get_csv(userid)
+    time = data["Time"]
+    state = data["State"]
     time_data = time[state == State]
     len_time_data = len(time_data.index)
     time_list = []
@@ -69,32 +85,36 @@ def time_val_of_state(State):
         time_list.append(time_d)
     return time_list
 
-def time_angle_list(State):
+def time_angle_list(userid, State):
     time_ang_list = []
-    time_list = time_val_of_state(State)
+    time_list = time_val_of_state(userid, State)
     for i in time_list:
         time_to_angle = to_angle(i)
         time_ang_list.append(time_to_angle)
     return time_ang_list
 
-def mean_time_of_state(state):
-    time_mean = mean_time(time_val_of_state(state))
+def mean_time_of_state(userid, state):
+    time_mean = mean_time(time_val_of_state(userid, state))
     if time_mean == 'No data':
         return 'No data'
     else:
         return time_mean
 
-def std_time_of_state(state):
-    mtos = mean_time_of_state(state)
+def std_time_of_state(userid, state):
+    mtos = mean_time_of_state(userid, state)
     if mtos == 'No data':
         return 'No data'
     else:
         time_mean_ang = to_angle(mtos)
-        time_std_ang = std_of_angles(time_angle_list(state), time_mean_ang)
+        time_std_ang = std_of_angles(time_angle_list(userid, state), time_mean_ang)
         time_std = angle_to_hms(time_std_ang)
         return time_std
 
-def date_val_of_state(State):
+def date_val_of_state(userid, State):
+    data = get_csv(userid)
+    time = data["Time"]
+    state = data["State"]
+
     time_data = time[state == State]
     len_time_data = len(time_data.index)
     date_list = []
@@ -103,8 +123,8 @@ def date_val_of_state(State):
         date_list.append(date_val)
     return date_list
 
-def average_num_use(State):
-    c = Counter(date_val_of_state(State))
+def average_num_use(userid, State):
+    c = Counter(date_val_of_state(userid, State))
     c_sum = 0
     for i in range(1, 32):
         c_sum += int(c[str(i).zfill(2)])

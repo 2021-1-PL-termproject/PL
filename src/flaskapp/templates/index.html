@@ -7,10 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="#" method="POST">
-        <p>Name:</p>
-        <p><input type='text' name='nm'></p>
-        <p><input type='submit' value='submit'></p>
-    </form>
+    <form method="POST">
+        <div class="form-group">
+          <label for="ownerid">Owner ID</label>
+          <input
+            type="ownerid"
+            class="form-control"
+            id="ownerid"
+            name="ownerid"
+            placeholder="Enter ownerid"
+          />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
 </body>
 </html>
