@@ -88,6 +88,37 @@ class Suni:
                 num_response += 1
         return num_response
 
+    def avg_response_length(self, sliced=None):
+        """
+        This function calculates average length of user responses
+        (by counting word segments in each response).
+        :param sliced: (pandas dataframe) sliced data (Default: None)
+        :return: (float) the average number of word segments in user response
+        """
+        if sliced is not None:
+            data = sliced
+        else:
+            data = self.data
+
+        num_response = 0
+        total_segments = 0
+        for i in range(len(data)):
+            if not pd.isna(data["STT_1"][i]):
+                msg = data["STT_1"][i]
+                total_segments += len(msg.split())
+                num_response += 1
+            if not pd.isna(data["STT_2"][i]):
+                msg = data["STT_2"][i]
+                total_segments += len(msg.split())
+                num_response += 1
+            if not pd.isna(data["STT_3"][i]):
+                msg = data["STT_3"][i]
+                total_segments += len(msg.split())
+                num_response += 1
+
+        avg = total_segments/num_response if num_response != 0 else 0
+        return round(avg, 2)
+
     def participated_program(self, sliced=None):
         """
         This function returns list of programs the user participated.
@@ -258,6 +289,51 @@ class Suni:
                 prob_response[item] = round(response[item] / num_msg[item], 2)
         sorted_prob = sorted(prob_response.items(), key=operator.itemgetter(1), reverse=True)
         return sorted_prob
+
+    def avg_response_length_for_msg(self, sliced=None):
+        """
+        This function calculates average length of user responses for each message type
+        (by counting word segments in each response).
+        :param sliced: (pandas dataframe) sliced data (Default: None)
+        :return: (list) list of the average number of word segments in user response
+                        for each message type (in descending order)
+        """
+        if sliced is not None:
+            data = sliced
+        else:
+            data = self.data
+
+        num_response = {}
+        total_segments = {}
+        for i in range(len(data)):
+            if not pd.isna(data["STT_1"][i]):
+                msg_type = data["Sequence"][i]
+                if msg_type in num_response:
+                    num_response[msg_type] += 1
+                else:
+                    num_response[msg_type] = 1
+                    total_segments[msg_type] = 0
+                msg = data["STT_1"][i]
+                total_segments[msg_type] += len(msg.split())
+
+            if not pd.isna(data["STT_2"][i]):
+                msg_type = data["Sequence"][i]
+                num_response[msg_type] += 1
+                msg = data["STT_2"][i]
+                total_segments[msg_type] += len(msg.split())
+
+            if not pd.isna(data["STT_3"][i]):
+                msg_type = data["Sequence"][i]
+                num_response[msg_type] += 1
+                msg = data["STT_3"][i]
+                total_segments[msg_type] += len(msg.split())
+
+        avg = {}
+        for item in num_response:
+            if num_response[item] >= 5:     # refine data
+                avg[item] = round(total_segments[item]/num_response[item], 2)
+        sorted_avg = sorted(avg.items(), key=operator.itemgetter(1), reverse=True)
+        return sorted_avg
 
 
 
