@@ -3,13 +3,11 @@ from flaskapp import app
 from .mean_std import *
 
 @app.route('/', methods=["POST", "GET"])
-@app.route('/main/', methods=["POST", "GET"])
-def main():
+def login():
     if request.method == "POST":
         usrid=request.form["ownerid"]
         return redirect(url_for("user", usr=usrid))
-    else:
-        return render_template('login.html')
+    return render_template('login.html')
 
 @app.route('/<usr>')
 def user(usr):
