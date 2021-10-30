@@ -65,20 +65,6 @@ input[id*="open"] + label {
   position: relative;
 }
 
-.mainmenu {
-  /*mainmenu: font*/
-  font-size: 24px;
-  color: white;
-  text-decoration: none;
-}
-.submenu {
-  /*mainmenu: font*/
-  font-size: 20px;
-  line-height: 250%;
-  color: black;
-  text-decoration: none;
-}
-
 /*---텍스트---*/
 .main-text {
   padding: 20px;

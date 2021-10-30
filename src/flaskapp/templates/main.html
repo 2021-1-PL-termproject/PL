@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="static/css/main.css" type="text/css">
     <title>사이트명</title> <!-- 나중에 이름 변경 -->
 </head>
@@ -15,58 +16,41 @@
         <div class="sidebar">
             <div class="user">
                     <span class="user-info">ID {{usr}}님<br>환영합니다!</span> <!-- 추출한 이름으로 표시해도 괜찮을 듯 -->
-                    <button id="logout">로그아웃</button>
+                    <a class="nav-link" href="{{ url_for('login') }}"><button id="logout">로그아웃</button></a>
             </div>
-            <div class="menu">
-                <ul>
-                    <li>
-                        <div class="mainmenu">
-                            <input type="radio" name="mainmenu" id="open01">
-                            <label for="open01">활동량</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="mainmenu">
-                            <input type="radio" name="mainmenu" id="open02">
-                            <label for="open02">생활패턴</label>
-                        </div>                       
-                    </li>                    
-                    <li>
-                        <div class="mainmenu">
-                            <input type="radio" name="mainmenu" id="open03">
-                            <label for="open03">건강상태</label>
-                        </div>                       
-                    </li>
-                    <li>
-                        <li>
-                            <div class="mainmenu">
-                                <input type="radio" name="mainmenu" id="open04">
-                                <label for="open04">순이대화</label>
-                            </div>
-                        </li>
-                    </li>
-                    <li>
-                        <div class="mainmenu">
-                            <input type="radio" name="mainmenu" id="open05">
-                            <label for="open05">요약보고서</label>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            
+            <div class="nav nav-pills flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <button class="nav-link active" id="v-pills-action-tab" data-bs-toggle="pill" data-bs-target="#v-pills-action" type="button" role="tab" aria-controls="v-pills-action" aria-selected="true">활동량</button>
+                <button class="nav-link" id="v-pills-pattern-tab" data-bs-toggle="pill" data-bs-target="#v-pills-pattern" type="button" role="tab" aria-controls="v-pills-pattern" aria-selected="false">생활패턴</button>
+                <button class="nav-link" id="v-pills-health-tab" data-bs-toggle="pill" data-bs-target="#v-pills-health" type="button" role="tab" aria-controls="v-pills-health" aria-selected="false">건강상태</button>
+                <button class="nav-link" id="v-pills-AI-tab" data-bs-toggle="pill" data-bs-target="#v-pills-AI" type="button" role="tab" aria-controls="v-pills-AI" aria-selected="false">순이대화</button>
+                <button class="nav-link" id="v-pills-abstract-tab" data-bs-toggle="pill" data-bs-target="#v-pills-abstract" type="button" role="tab" aria-controls="v-pills-abstract" aria-selected="false">요약보고서</button>
+              </div>
         </div>
-    
-        <!-- 본문 -->
-        <div class="main-text">
-            <!-- 페이지명 -->
-            <h2>주요활동</h2>   <!-- 임시. 페이지명 맞춰 변경 -->
-            <!-- 본문 -->
-            <div class="text">
-                <p>
-                    (내용 추가)
-                </p>
+            
+        <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-action" role="tabpanel" aria-labelledby="v-pills-action-tab">
+                활동량 본문
             </div>
-        </div></div>
-    </body>
+            <div class="tab-pane fade" id="v-pills-pattern" role="tabpanel" aria-labelledby="v-pills-pattern-tab">
+                생활패턴 본문
+                <br>
+                {% if toilet == 'No data' %}
+                    화장실 이용 기록이 없어요!
+                {% else %}
+                    하루에 평균 {{toilet}}번 화장실을 이용하시네요!
+                {% endif %}
+            </div>
+            <div class="tab-pane fade" id="v-pills-health" role="tabpanel" aria-labelledby="v-pills-health-tab">
+                건강상태 본문
+            </div>
+            <div class="tab-pane fade" id="v-pills-AI" role="tabpanel" aria-labelledby="v-pills-AI-tab">
+                순이대화 본문
+            </div>
+            <div class="tab-pane fade" id="v-pills-abstract" role="tabpanel" aria-labelledby="v-pills-abstract-tab">
+                요약보고서 본문
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
