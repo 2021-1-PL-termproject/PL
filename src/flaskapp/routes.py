@@ -13,6 +13,5 @@ def main():
 
 @app.route('/<usr>')
 def user(usr):
-    if type(get_csv(usr)) == str:
-        return 'No User'
-    return render_template('main.html', usr=usr)
+    toilet = average_num_use(usr, '화장실 이용')
+    return render_template('main.html', usr=usr, toilet=toilet)
