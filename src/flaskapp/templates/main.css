@@ -1,0 +1,146 @@
+@charset "utf-8";
+
+.container {
+  display: grid;
+  grid-template-columns: 300px 1fr; /*전체 화면 분할*/
+}
+
+/*---사이드 바---*/
+.sidebar {
+  display: grid;
+  grid-template-rows: 150px 1fr; /*유저 정보 높이 맞게 수정*/
+  min-height: 1000px;
+  margin: 0;
+
+  background-color: gray;
+}
+
+/*유저 정보*/
+.user {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+
+  box-sizing: border-box;
+  width: 300px;
+  height: 150px;
+  margin: 0px;
+  padding: 10px;
+  place-items: center;
+  align-self: center;
+
+  background: lightgray;
+}
+
+.user-info {
+  /*ID 표시*/
+  margin: 0;
+  color: black;
+  font-size: 20px;
+}
+
+button[id="logout"] {
+  /*로그아웃 버튼*/
+  width: 90px;
+  height: 50px;
+  border-radius: 3px;
+  margin-left: 20px;
+
+  background-color: gray;
+  color: white;
+  font-size: 16px;
+}
+
+/*아코디언 메뉴*/
+input[id*="open"] {
+  /*hide radio*/
+  display: none;
+}
+input[id*="open"] + label {
+  /*mainmenu*/
+  display: block;
+  padding: 25px;
+  /*border-top: 1px solid white;*/
+
+  cursor: pointer;
+  position: relative;
+}
+input[id*="open"] + label em {
+  /*icon: closed*/
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  background: url(./src/down_arrow_button_resize.png) 0 0 no-repeat;
+}
+input[id*="open"]:checked + label em {
+  /*icon: openned*/
+  display: inline-block;
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  margin-top: -30px;
+  background: url(./src/up_arrow_button_resize.png) 0 0 no-repeat;
+}
+input[id*="open"] + label + div {
+  /*submenu: closed*/
+  max-height: 0;
+  transition: all 0.5s;
+  overflow: hidden;
+  background: lightgray;
+}
+input[id*="open"]:checked + label + div {
+  /*submenu: openned*/
+  max-height: 200px;
+  transition: all 0.5s;
+  overflow: hidden;
+}
+input[id*="open"] + label + div ul {
+  display: inline-block;
+  padding: 20px;
+
+  text-decoration: none;
+}
+.mainmenu {
+  /*mainmenu: font*/
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+}
+.submenu {
+  /*mainmenu: font*/
+  font-size: 20px;
+  line-height: 250%;
+  color: black;
+  text-decoration: none;
+}
+
+/*---텍스트---*/
+.main-text {
+  padding: 20px;
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h2 {
+  padding-bottom: 10px;
+  margin: 0;
+  display: block;
+
+  font-size: 30px;
+  text-align: center;
+}
+
+.text {
+  font-size: 16px;
+  text-align: justify;
+}
