@@ -50,7 +50,7 @@ button[id="logout"] {
   font-size: 16px;
 }
 
-/*아코디언 메뉴*/
+/*메뉴*/
 input[id*="open"] {
   /*hide radio*/
   display: none;
@@ -64,47 +64,7 @@ input[id*="open"] + label {
   cursor: pointer;
   position: relative;
 }
-input[id*="open"] + label em {
-  /*icon: closed*/
-  display: inline-block;
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  margin-top: -15px;
-  background: url(./src/down_arrow_button_resize.png) 0 0 no-repeat;
-}
-input[id*="open"]:checked + label em {
-  /*icon: openned*/
-  display: inline-block;
-  position: absolute;
-  top: 50px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  margin-top: -30px;
-  background: url(./src/up_arrow_button_resize.png) 0 0 no-repeat;
-}
-input[id*="open"] + label + div {
-  /*submenu: closed*/
-  max-height: 0;
-  transition: all 0.5s;
-  overflow: hidden;
-  background: lightgray;
-}
-input[id*="open"]:checked + label + div {
-  /*submenu: openned*/
-  max-height: 200px;
-  transition: all 0.5s;
-  overflow: hidden;
-}
-input[id*="open"] + label + div ul {
-  display: inline-block;
-  padding: 20px;
 
-  text-decoration: none;
-}
 .mainmenu {
   /*mainmenu: font*/
   font-size: 24px;

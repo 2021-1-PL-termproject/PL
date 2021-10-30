@@ -13,5 +13,4 @@ def main():
 
 @app.route('/<usr>')
 def user(usr):
-    toilet = average_num_use(usr, '화장실 이용')
-    return render_template('main.html', usr=usr, toilet=toilet)
+    return render_template('main.html', usr=usr)
