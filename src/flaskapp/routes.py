@@ -1,15 +1,18 @@
 from flask import render_template, redirect, url_for, request
 from flaskapp import app
+from .mean_std import *
 
 @app.route('/', methods=["POST", "GET"])
 @app.route('/main/', methods=["POST", "GET"])
 def main():
     if request.method == "POST":
-        user = request.form["nm"]
-        return redirect(url_for("user", usr=user))
+        usrid=request.form["ownerid"]
+        return redirect(url_for("user", usr=usrid))
     else:
-        return render_template('index.html')
+        return render_template('login.html')
 
 @app.route('/<usr>')
 def user(usr):
-    return render_template('user.html', content=usr)
+    if type(get_csv(usr)) == str:
+        return 'No User'
+    return render_template('main.html', usr=usr)

@@ -1,0 +1,42 @@
+@charset "utf-8";
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -70%);
+}
+
+/*ID 입력창*/
+input[type="text"] {
+  box-sizing: border-box;
+  width: 300px;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid gray;
+  font-size: 20px;
+}
+input[type="text"]:focus {
+  border-bottom: 1px solid gray;
+}
+input[type="text"]:focus,
+input[type="text"]:placeholder-shown {
+  border-bottom: 1px solid gray;
+  outline: none;
+}
+input[type="text"]:not(focus),
+input[type="text"]:not(:placeholder-shown) {
+  border-bottom: 1px solid darkslategray;
+  outline: none;
+}
+
+/*로그인 버튼*/
+button[type="submit"] {
+  width: 80px;
+  height: 40px;
+  border-radius: 3px;
+  background-color: darkslategray;
+  color: white;
+
+  font-size: 18px;
+}
