@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, request
 from flaskapp import app
-from .mean_std import *
+from .lifepattern import *
 
 @app.route('/', methods=["POST", "GET"])
 def login():
