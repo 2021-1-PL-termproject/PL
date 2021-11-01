@@ -33,106 +33,67 @@
             </div>
             <div class="tab-pane fade" id="v-pills-pattern" role="tabpanel" aria-labelledby="v-pills-pattern-tab">
                 생활패턴 본문
-                <br>
-                {% if toilet == 'No data' %}
-                    화장실 이용 기록이 없어요.
-                {% else %}
-                    하루에 평균 {{toilet}}번 화장실을 이용하시네요.
-                {% endif %}
-                <br>
-                {% if hobby == 'No data' %}
-                    취미활동을 한 기록이 없어요.
-                {% else %}
-                    하루에 평균 {{hobby}}번 취미활동을 하시네요.
-                {% endif %}
-                <br>
-                {% if bm == 'No data' %}
-                    아침식사 기록이 없어요.
-                {% else %}
-                    아침식사를 평균 {{bm.split(':')[0]}}시 {{bm.split(':')[1]}}분 {{bm.split(':')[2]}}초에 하시네요.
-                {% endif %}
-                <br>
-                {% if lm == 'No data' %}
-                    점심식사 기록이 없어요.
-                {% else %}
-                    점심식사를 평균 {{lm.split(':')[0]}}시 {{lm.split(':')[1]}}분 {{lm.split(':')[2]}}초에 하시네요.
-                {% endif %}
-                <br>
-                {% if dm == 'No data' %}
-                    저녁식사 기록이 없어요.
-                {% else %}
-                    저녁식사를 평균 {{dm.split(':')[0]}}시 {{dm.split(':')[1]}}분 {{dm.split(':')[2]}}초에 하시네요.
-                {% endif %}
-                <br>
-                {% if rmm == 'No data' %}
-                    일반 약을 복용 기록이 없어요.
-                {% else %}
-                    일반 약을 평균 {{rmm.split(':')[0]}}시 {{rmm.split(':')[1]}}분 {{rmm.split(':')[2]}}초에 복용 하시네요.
-                {% endif %}
-                <br>
-                {% if stm == 'No data' %}
-                    수면 기록이 없어요.
-                {% else %}
-                    평균 {{stm.split(':')[0]}}시 {{stm.split(':')[1]}}분 {{stm.split(':')[2]}}초에 숙면을 취하시네요.
-                {% endif %}
-                <br>
-                {% if atm == 'No data' %}
-                    기상 기록이 없어요.
-                {% else %}
-                    평균 {{atm.split(':')[0]}}시 {{atm.split(':')[1]}}분 {{atm.split(':')[2]}}초에 기상 하시네요.
-                {% endif %}
-                <br>
-                {% if avs == 'No data' %}
-                    pass
-                {% else %}
-                    평균 {{avs.split(':')[0]}}시간 {{avs.split(':')[1]}}분 {{avs.split(':')[2]}}초 동안 숙면을 취하시네요.
-                {% endif %}
+
             </div>
             <div class="tab-pane fade" id="v-pills-AI" role="tabpanel" aria-labelledby="v-pills-AI-tab">
-                순이대화 본문
+                <!-- 순이 대화  본문-->
+                <p>
+                    <!-- 순이 대화 -->
+                    {% if num_res == 0 %}
+                        {{name}}님은 아직 순이와 대화를 나누신 적이 없어요. 순이가 {{name}}님의 이야기를 기다리고 있어요!
+                    {% else %}
+                        {{name}}님은 순이와 이야기를 {{num_res}}번 주고받았어요.
+                        <br>{{name}}님은 평균 {{len_res}} 단어로 순이에게 대답하셨어요.
+                        <br>{{name}}님은 순이의 말에 평균 {{prob_res2}}% 응답해주셨어요.
+                        {% if more_than_3_res_type == True %}
+                            <br>{{name}}님은 {{prob_res[0][0]}} 활동을 할 때 가장 많이 순이에게 대답해주셨어요.
+                            {% if prob_res[1][0] == "전체" %}
+                                <br>{{name}}님은 {{prob_res[2][0]}} 활동을 할 때 두 번째로 많이 순이에게 대답해주셨어요.
+                                <br>{{name}}님은 {{prob_res[3][0]}} 활동을 할 때 세 번째로 많이 순이에게 대답해주셨어요.
+                            {% elif prob_res[2][0] == "전체" %}
+                                <br>{{name}}님은 {{prob_res[1][0]}} 활동을 할 때 두 번째로 많이 순이에게 대답해주셨어요.
+                                <br>{{name}}님은 {{prob_res[3][0]}} 활동을 할 때 세 번째로 많이 순이에게 대답해주셨어요.
+                            {% else %}
+                                <br>{{name}}님은 {{prob_res[1][0]}} 활동을 할 때 두 번째로 많이 순이에게 대답해주셨어요.
+                                <br>{{name}}님은 {{prob_res[2][0]}} 활동을 할 때 세 번째로 많이 순이에게 대답해주셨어요.
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </p>
+                <p>
+                    <!-- 참여 프로그램 -->
+                    {% if len_programs == 0 %}
+                        {{name}}님은 아직 아무 프로그램에도 참여하지 않으셨어요. 순이와 함께 프로그램에 참여해보시는 건 어떠세요?
+                    {% else %}
+                        {{name}}님이 가장 많이 참여하신 프로그램은 {{programs[0][0]}} 프로그램이에요. 총 {{programs[0][1]}}번 참여하셨네요!
+                        {% if more_than_3_programs == True %}
+                            <br>{{name}}님이 두 번째로 많이 참여하신 프로그램은 {{programs[1][0]}}이고, 총 {{programs[1][1]}}번 참여하셨어요.
+                            <br>{{name}}님이 세 번째로 많이 참여하신 프로그램은 {{programs[2][0]}}이고, 총 {{programs[2][1]}}번 참여하셨어요.
+                        {% endif %}
+                    {% endif %}
+                </p>
+
+
             </div>
             <div class="tab-pane fade" id="v-pills-advice" role="tabpanel" aria-labelledby="v-pills-advice-tab">
-                조언 본문
-                <br>
-                <!-- 취미활동을 하루에 1번 이하로 하면 조언 -->
-                {% if hobby == 'No data' %}
-                    취미활동을 하는 것이 좋겠어요!
-                {% elif hobby[0] == 0 %}
-                    취미활동 빈도를 늘리는 것이 좋을거 같아요!
-                {% endif %}
-                <br>
-                <!-- 식사시간 표준편차가 1시간 이상일 때 조언 -->
-                {% if bs == 'No data' %}
-                {% elif bs[0] != '0' %}
-                    아침식사를 규칙적으로 하는 것이 좋을거 같아요!
-                {% endif %}
-                <br>
-                {% if ls == 'No data' %}
-                {% elif ls[0] != '0' %}
-                    점심식사를 규칙적으로 하는 것이 좋을거 같아요!
-                {% endif %}
-                <br>
-                {% if ds == 'No data' %}
-                {% elif ds[0] != '0' %}
-                    저녁식사를 규칙적으로 하는 것이 좋을거 같아요!
-                {% endif %}
-                <br>
-                <!-- 취침/기상시간 표준편차가 2시간 이상일 때 조언 -->
-                {% if sts == 'No data' %}
-                {% elif sts[0] != '0' and sts[0] != '1' %}
-                    취침시간을 규칙적으로 하는 것이 좋을거 같아요!
-                {% endif %}
-                <br>
-                {% if ats == 'No data' %}
-                {% elif ats[0] != '0' and ats[0] != '1' %}
-                    기상시간을 규칙적으로 하는 것이 좋을거 같아요!
-                {% endif %}
-                <br>
-                <!-- 일반 약 복용 표준편차가 1시간 이상일 때 조언 -->
-                {% if rms == 'No data' %}
-                {% elif rms[0] != '0' %}
-                    약을 규칙적으로 복용하는 것이 좋을거 같아요!
-                {% endif %}
+                <!-- 조언 본문 -->
+                <p> <!-- 순이 대화 -->
+                    {% if (num_res - avg_res) < 0 %}
+                        {{name}}님은 다른 사용자들보다 순이와 적게 대화하고 있어요. 순이와 더 많이 이야기해보시는 건 어떠세요? 순이도 재미있는 이야깃거리로 찾아갈게요.
+                    {% else %}
+                        {{name}}님은 다른 사용자들보다 순이와 많이 대화하고 있어요. 순이도 {{name}}님과 많은 이야기를 할 수 있어서 기뻐요! 앞으로도 순이를 많이 찾아주세요.
+                    {% endif %}
+                </p>
+                <p> <!-- 참여 프로그램 -->
+                    {% if (total_programs - avg_programs) < 0 %}
+                        {{name}}님은 다른 사용자들보다 프로그램 참여 횟수가 적어요. 여러 프로그램에 참여해보며 취미 활동을 늘려보시는 건 어떠세요?
+                    {% else %}
+                        {{name}}님은 다른 사용자들보다 프로그램 참여 횟수가 많아요. 앞으로도 꾸준히 활동해주세요!
+                    {% endif %}
+                </p>
+
+
+
             </div>
             <div class="tab-pane fade" id="v-pills-abstract" role="tabpanel" aria-labelledby="v-pills-abstract-tab">
                 요약보고서 본문
