@@ -2,6 +2,7 @@ from flask import render_template, redirect, url_for, request
 from flaskapp import app
 from .lifepattern import *
 from .suni import *
+from .Shin import *
 
 @app.route('/', methods=["POST", "GET"])
 def login():
@@ -13,8 +14,8 @@ def login():
 @app.route('/<usr>')
 def user(usr):
     # open files
-    user_profile = pd.read_excel("../hs_g73_m08/user_profile.xlsx")   # 임시
-    user_data = read_data(user_profile, "..//hs_g73_m08/")             # 임시
+    user_profile = pd.read_excel("hs_g73_m08/user_profile.xlsx")   # 임시
+    user_data = read_data(user_profile, "hs_g73_m08/")             # 임시
 
     # 순이 대화
     name = extract_user_name(user_data[int(usr)])       # 사용자 이름
@@ -44,6 +45,15 @@ def user(usr):
             avg_programs += item[1]
     avg_programs = round(avg_programs / len(user_data.keys()), 2)
 
+    #활동량
+
+    exer = exercise(usr)
+    exermean = exerciseMean(usr)
+    exerMent = exerciseMent(usr)
+    zValueSc = zValueScore(usr)
+    goout = goOut(usr)
+    gooutMean = goOutMean(usr)
+
     toilet = average_num_use(usr, '화장실 이용')
     hobby = average_num_use(usr, '취미활동')
     bm = mean_time_of_state(usr, '조식')
@@ -66,5 +76,6 @@ def user(usr):
                            avg_res=avg_res, avg_len=avg_len, avg_prob=avg_prob,
                            programs=programs, len_programs=len_programs, more_than_3_programs=more_than_3_programs,
                            total_programs=total_programs, avg_programs=avg_programs,
+                           exer=exer, exermean=exermean, exerMent=exerMent, zValueSc=zValueSc, goout=goout, gooutMean=gooutMean,
                            toilet=toilet, hobby=hobby, bm=bm, lm=lm, dm=dm, bs=bs, ls=ls, ds=ds,
                            rmm=rmm, rms=rms, stm=stm, sts=sts, atm=atm, ats=ats, avs=avs)
