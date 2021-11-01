@@ -75,13 +75,11 @@ def get_csv(userid):
 
 def time_val_of_state(userid, State):
     data = get_csv(userid)
-    time = data["Time"]
-    state = data["State"]
-    time_data = time[state == State]
+    time_data = data.loc[data['State'] == State, 'Time']
     len_time_data = len(time_data.index)
     time_list = []
     for i in range(len_time_data):
-        time_d = time[state == State].str[12:].values[i]
+        time_d = data.loc[data['State'] == State, 'Time'].str[12:].values[i]
         time_list.append(time_d)
     return time_list
 
@@ -112,14 +110,11 @@ def std_time_of_state(userid, state):
 
 def date_val_of_state(userid, State):
     data = get_csv(userid)
-    time = data["Time"]
-    state = data["State"]
-
-    time_data = time[state == State]
+    time_data = data.loc[data['State'] == State, 'Time']
     len_time_data = len(time_data.index)
     date_list = []
     for i in range(len_time_data):
-        date_val = time[state == State].str[9:11].values[i]
+        date_val = data.loc[data['State'] == State, 'Time'].str[9:11].values[i]
         date_list.append(date_val)
     return date_list
 
