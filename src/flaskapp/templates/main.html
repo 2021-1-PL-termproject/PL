@@ -37,10 +37,19 @@
                 <br>이번달에는 총 {{goout}}번 외출하셨네요.
                 <br>하루에 평균 {{gooutMean}}번 외출하셨어요.
                 {% if goOutMean <= 0.5 %}
+                <!-- 활동량 본문 -->
+                <br>한달동안 실내운동은 {{exer[0]}}번 실외운동은 {{exer[1]}}번 하셨어요.
+                <br>하루에 평균 {{exerMean}}번 운동하시네요!
+                <br>{{exerMent}}
+                <br>{{name}}님의 이번달 활동량 누적 점수는 {{zValueSc}}점 이에요.
+                <br>이번달에는 총 {{goout}}번 외출하셨네요.
+                <br>하루에 평균 {{gooutMean}}번 외출하셨어요.
+                {% if gooutMean <= 0.5 %}
                     외출은 기분전환에 큰 도움이 된답니다! 다음달에는 바깥에서 신선한 공기를 더 많이 느껴보세요!
                 {% else %}
 
                 {% endif %}
+
 
             </div>
             <div class="tab-pane fade" id="v-pills-pattern" role="tabpanel" aria-labelledby="v-pills-pattern-tab">
@@ -146,8 +155,6 @@
                         {% endif %}
                     {% endif %}
                 </p>
-
-
             </div>
             <div class="tab-pane fade" id="v-pills-advice" role="tabpanel" aria-labelledby="v-pills-advice-tab">
                 <!-- 조언 본문 -->
@@ -212,9 +219,6 @@
                         {{name}}님은 다른 사용자들보다 프로그램 참여 횟수가 많아요. 앞으로도 꾸준히 활동해주세요!
                     {% endif %}
                 </p>
-
-
-
             </div>
             <div class="tab-pane fade" id="v-pills-abstract" role="tabpanel" aria-labelledby="v-pills-abstract-tab">
                 요약보고서 본문

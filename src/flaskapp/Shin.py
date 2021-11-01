@@ -21,7 +21,7 @@ def openData(id):
 
 
 def openID():
-    data = pd.read_excel("user_profile.xlsx", engine ='openpyxl')
+    data = pd.read_excel("hs_g73_m08/user_profile.xlsx", engine ='openpyxl')
     return data
 
 #한달 전체에 대한 운동 총 횟수
@@ -126,8 +126,11 @@ def date(id):
         if((data.iloc[i,1][9:11] not in dateCount)):
             dateCount.append(data.iloc[i,1][9:11])
     return len(dateCount)
+<<<<<<< HEAD
 
 
 
 
 print(exercise(486))
+=======
+>>>>>>> fa1da464924b0916bc19f7e6d1b76eade4c137e5
