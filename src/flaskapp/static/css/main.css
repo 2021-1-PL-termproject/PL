@@ -124,9 +124,9 @@ input[id*="open"] + label {
   grid-row-start: 1;
   grid-row-end: 4;
   text-align: left;
-  font-size: 20px;
-  margin-left: 10px;
-  padding: 20px 0;
+  font-size: 18px;
+  margin-left: 30px;
+  padding: 40px 10px;
 }
 
 .item5 {
@@ -135,6 +135,7 @@ input[id*="open"] + label {
   grid-row-start: 3;
   grid-row-end: 4;
   text-align: left;
+  font-size: 18px;
   padding: 0px;
 }
 
@@ -143,7 +144,7 @@ input[id*="open"] + label {
 }
 
 .mealadvice {
-  font-size: 17px;
+  font-size: 16px;
 }
 /*---텍스트---*/
 .main-text {
