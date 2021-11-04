@@ -54,6 +54,8 @@ def user(usr):
     goout = goOut(usr)
     gooutMean = goOutMean(usr)
 
+    # 생활패턴
+    
     toilet = average_num_use(usr, '화장실 이용')
     hobby = average_num_use(usr, '취미활동')
     bm = mean_time_of_state(usr, '조식')
