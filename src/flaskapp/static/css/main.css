@@ -90,3 +90,55 @@ h2 {
   font-size: 16px;
   text-align: justify;
 }
+
+#chart_div{
+    position: relative;
+    margin-left: 10px;
+}
+
+.testing{
+    position: relative;
+}
+
+.grid_A{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 1px;
+    padding: 5px;
+    height: 100vh;
+    background-color: "RED";
+}
+
+.zchart{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    text-align: center;
+    padding: 20px 0;
+}
+.zment{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    text-align: center;
+    padding: 20px 0;
+}
+.exerment{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    text-align: center;
+    padding: 20px 0;
+}
+.outment{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    text-align: center;
+    padding: 20px 0;
+}

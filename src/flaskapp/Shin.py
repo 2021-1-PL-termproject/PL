@@ -3,7 +3,7 @@ import pandas as pd
 import os
 from matplotlib import pyplot as plt
 import numpy as np
-import mpld3
+
 
 def openData(id):
     id = int(id)
