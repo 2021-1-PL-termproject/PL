@@ -29,28 +29,35 @@
             
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-action" role="tabpanel" aria-labelledby="v-pills-action-tab">
-                활동량 본문
-                <br>한달동안 실내운동은 {{exercise[0]}}번 실외운동은 {{exercise[1]}}번 하셨어요.
-                <br>하루에 평균 {{exercisemean}}번 운동하시네요!
-                <br>{{exerciseMent}}
-                <br>{{name}}님의 이번달 활동량 누적 점수는 {{zValueSc}}점 이에요.
-                <br>이번달에는 총 {{goout}}번 외출하셨네요.
-                <br>하루에 평균 {{gooutMean}}번 외출하셨어요.
-                {% if goOutMean <= 0.5 %}
                 <!-- 활동량 본문 -->
-                <br>한달동안 실내운동은 {{exer[0]}}번 실외운동은 {{exer[1]}}번 하셨어요.
-                <br>하루에 평균 {{exerMean}}번 운동하시네요!
-                <br>{{exerMent}}
-                <br>{{name}}님의 이번달 활동량 누적 점수는 {{zValueSc}}점 이에요.
-                <br>이번달에는 총 {{goout}}번 외출하셨네요.
-                <br>하루에 평균 {{gooutMean}}번 외출하셨어요.
-                {% if gooutMean <= 0.5 %}
-                    외출은 기분전환에 큰 도움이 된답니다! 다음달에는 바깥에서 신선한 공기를 더 많이 느껴보세요!
-                {% else %}
-
-                {% endif %}
-
-
+                <canvas id= "myChart" width="200" height="200">
+                    <script type="text/javascript">
+                        var A = {{zgraph[0]}}
+                        var B = {{zgraph[1]}}
+                        var C = {{zgraph[2]}}
+                        var D = {{zgraph[3]}}
+                    </script>
+                </canvas>
+                <div class="active">
+                    한달동안 실내운동은 {{exer[0]}}번 실외운동은 {{exer[1]}}번 하셨어요.<br>
+                    하루에 평균 {{exermean}}번 운동하시네요!<br>
+                    {{exerMent}}<br>
+                    {{name}}님의 이번달 실내 활동량 누적 점수는 {{zValueSc}}점 이에요.<br>
+                    {% if zValueSc < 100 %}
+                        활동량 점수가 부족해요. 실내에서 움직임이 너무 적은 것 같아요.<br>
+                    {% else %}
+                        활동량 점수를 100점이상 체우셨어요!
+                    {% endif %}
+                    이번달에는 총 {{goout}}번 외출하셨네요.<br>
+                    하루에 평균 {{gooutMean}}번 외출하셨어요.<br>
+                    {% if gooutMean <= 0.5 %}
+                        외출을 다소 적게 하시는 것 같아요. 거동이 불편해지신건 아니죠? 걱정되요...<br>
+                        외출은 기분전환에 큰 도움이 된답니다. 다음달에는 바깥에서 신선한 공기를 더 많이 느껴보세요!
+                    {% else %}
+                        적정량 이상으로 외출을 하시고 계세요. 건강을 위해 아주 바람직합니다! <br>
+                        하지만 너무 무리하지 않게 조심하세요!<br>
+                    {% endif %}
+                </div>
             </div>
             <div class="tab-pane fade" id="v-pills-pattern" role="tabpanel" aria-labelledby="v-pills-pattern-tab">
                 <!-- 생활패턴 본문-->
@@ -226,5 +233,7 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="static/js/zvalue.js"></script>
 </body>
 </html>

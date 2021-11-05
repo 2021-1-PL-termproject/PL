@@ -1,8 +1,9 @@
+
 import pandas as pd
 import os
 from matplotlib import pyplot as plt
 import numpy as np
-
+import mpld3
 
 def openData(id):
     id = int(id)
@@ -65,10 +66,25 @@ def zValue(id):
     data = data[~out]
     Zcolumn = data['Z'].value_counts()
     x = np.arange(4)
-    plt.rcParams['font.family'] = 'NanumGothic'
-    plt.bar(x, [Zcolumn["부동"], Zcolumn["미동"], Zcolumn["활동"], Zcolumn["매우 활동"]])
-    plt.xticks(x, ["부동", "미동", "활동", "매우 활동"])
-    plt.ylim(0, max(Zcolumn["부동"], Zcolumn["미동"], Zcolumn["활동"], Zcolumn["매우 활동"] ) + 5)
+    zcolumn = Zcolumn.rename_axis('AA').reset_index(name='counts')
+    if ((zcolumn['AA'] == "부동").any()):
+        A = Zcolumn["부동"]
+    else:
+        A = 0
+    if ((zcolumn['AA'] == "미동").any()):
+        B = Zcolumn["미동"]
+    else:
+        B = 0
+    if ((zcolumn['AA'] == "활동").any()):
+        C = Zcolumn["활동"]
+    else:
+        C = 0
+    if ((zcolumn['AA'] == "매우 활동").any()):
+        D = Zcolumn["매우 활동"]
+    else:
+        D = 0
+
+    return [A, B, C, D]
 
 
 #Zvalue 점수화
@@ -77,7 +93,24 @@ def zValueScore(id):
     out = data["State"].isin(["외출하기"])
     data = data[~out]
     Zcolumn = data['Z'].value_counts()
-    X = Zcolumn["부동"] * 0 + Zcolumn["미동"] * 1 + Zcolumn["활동"] * 2 + Zcolumn["매우 활동"] * 3
+    zcolumn = Zcolumn.rename_axis('AA').reset_index(name='counts')
+    if ((zcolumn['AA'] == "부동").any()):
+        A = Zcolumn["부동"]
+    else:
+        A = 0
+    if ((zcolumn['AA'] == "미동").any()):
+        B = Zcolumn["미동"]
+    else:
+        B = 0
+    if ((zcolumn['AA'] == "활동").any()):
+        C = Zcolumn["활동"]
+    else:
+        C = 0
+    if ((zcolumn['AA'] == "매우 활동").any()):
+        D = Zcolumn["매우 활동"]
+    else:
+        D = 0
+    X = A * 0 + B * 1 + C * 2 + D * 3
     return X
 
 #단순 외출 횟수
@@ -126,11 +159,9 @@ def date(id):
         if((data.iloc[i,1][9:11] not in dateCount)):
             dateCount.append(data.iloc[i,1][9:11])
     return len(dateCount)
-<<<<<<< HEAD
 
 
 
 
-print(exercise(486))
-=======
->>>>>>> fa1da464924b0916bc19f7e6d1b76eade4c137e5
+
+
