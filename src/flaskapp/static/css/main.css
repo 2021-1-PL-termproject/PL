@@ -1,15 +1,21 @@
 @charset "utf-8";
 
+html {
+  height: 100vh;
+  overflow: hidden;
+}
+
 .container {
   display: grid;
   grid-template-columns: 300px 1fr; /*전체 화면 분할*/
+  height: 100vh;
 }
 
 /*---사이드 바---*/
 .sidebar {
   display: grid;
   grid-template-rows: 150px 1fr; /*유저 정보 높이 맞게 수정*/
-  min-height: 1000px;
+  height: 100vh;
   margin: 0;
 
   background-color: gray;
@@ -63,6 +69,108 @@ input[id*="open"] + label {
 
   cursor: pointer;
   position: relative;
+}
+
+.lifepattern {
+  position: relative;
+  margin-left: 10px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-rows: 4fr 1fr 3fr;
+  grid-gap: 1px;
+  padding: 5px;
+  height: 100vh;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-top: 1px;
+}
+
+.item1 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.item2 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.item3 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  text-align: left;
+  font-size: 15px;
+  padding: 0px;
+}
+
+.item4 {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 4;
+  text-align: left;
+  font-size: 18px;
+  margin-left: 30px;
+  padding: 40px 10px;
+}
+
+.item5 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  text-align: left;
+  font-size: 18px;
+  padding: 0px;
+}
+
+.canvas,
+.canvas2 {
+  margin-top: 5px;
+}
+
+.mealadvice {
+  font-size: 16px;
+}
+
+/*---순이대화---*/
+.suni {
+  padding: 30px;
+}
+.suni div.para {
+  margin-bottom: 80px;
+}
+.suni span {
+  font-size: 18px;
+  font-weight: bold;
+}
+.suni .bar-graph span {
+  display: block;
+  height: 40px;
+  border-radius: 40px;
+  background-color: gray;
+  text-align: right;
+}
+canvas#response-prob {
+  display: block;
+  width: 300px;
+  height: 150px;
+  align-items: center;
 }
 
 /*---텍스트---*/
