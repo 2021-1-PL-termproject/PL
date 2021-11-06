@@ -24,15 +24,20 @@
                 <button class="nav-link" id="v-pills-AI-tab" data-bs-toggle="pill" data-bs-target="#v-pills-AI" type="button" role="tab" aria-controls="v-pills-AI" aria-selected="false">순이대화</button>
                 <button class="nav-link" id="v-pills-advice-tab" data-bs-toggle="pill" data-bs-target="#v-pills-advice" type="button" role="tab" aria-controls="v-pills-advice" aria-selected="false">조언</button>
                 <button class="nav-link" id="v-pills-abstract-tab" data-bs-toggle="pill" data-bs-target="#v-pills-abstract" type="button" role="tab" aria-controls="v-pills-abstract" aria-selected="false">요약보고서</button>
-              </div>
+            </div>
+            <!-- Button trigger modal -->
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              순이의 건강 리포트
+            </button>
         </div>
             
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-action" role="tabpanel" aria-labelledby="v-pills-action-tab">
                 <div class="grid_A">
-                <!-- 활동량 본문 -->
-                    <div class = "zchart">
-                        <div id= "chart_div" >
+                    <!-- 활동량 본문 -->
+                    <div class ="grid-zchart">
+                        <div id="chart_div" >
                             <script type="text/javascript" >
                                 var A = {{zgraph[0]}}
                                 var B = {{zgraph[1]}}
@@ -41,24 +46,43 @@
                             </script>
                         </div>
                     </div>
-                    <div class = "zment">
+                    <div class ="grid-zment">
+                        <div class="zment1">
                         {{name}}님의 이번달 실내 활동량 누적 점수는 {{zValueSc}}점 이에요.<br>
                         {% if zValueSc < 100 %}
                             활동량 점수가 부족해요. 실내에서 움직임이 너무 적은 것 같아요.<br>
                         {% else %}
                             활동량 점수를 100점이상 체우셨어요!
                         {% endif %}
+                        </div>
                     </div>
-                    <div class = "exerment">
+                    <div class="grid-exerchart">
+                        <div id="chart_exer" >
+                            <script type="text/javascript" >
+                                var AA = {{exer[0]}}
+                                var BB = {{exer[1]}}
+                                var CC = {{exermean}}
+                            </script>
+                        </div>
+                    </div>
+                    <div class ="grid-exerment">
                         한달동안 실내운동은 {{exer[0]}}번 실외운동은 {{exer[1]}}번 하셨어요.<br>
                         하루에 평균 {{exermean}}번 운동하시네요!<br>
-                        {{exerMent}}<br>
+                        <br><p>{{exerMent}}</p>
                     </div>
-                    <div class = "outment">
+                    <div class="grid-outchart">
+                        <div id="chart_out" >
+                            <script type="text/javascript" >
+                                var AAA = {{goout}}
+                                var BBB = {{gooutMean}}
+                            </script>
+                        </div>
+                    </div>
+                    <div class ="grid-outment">
                         이번달에는 총 {{goout}}번 외출하셨네요.<br>
-                        하루에 평균 {{gooutMean}}번 외출하셨어요.<br>
+                        하루에 평균 {{gooutMean}}번 외출하셨어요.<br><br>
                         {% if gooutMean <= 0.5 %}
-                            외출을 다소 적게 하시는 것 같아요. 거동이 불편해지신건 아니죠? 걱정되요...<br>
+                            외출을 다소 적게 하시는 것 같아요. 거동이 불편해지신건 아니죠? 걱정되요...<br><br>
                             외출은 기분전환에 큰 도움이 된답니다. 다음달에는 바깥에서 신선한 공기를 더 많이 느껴보세요!
                         {% else %}
                             적정량 이상으로 외출을 하시고 계세요. 건강을 위해 아주 바람직합니다! <br>
@@ -239,9 +263,26 @@
                 요약보고서 본문
             </div>
         </div>
+        <!-- Modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-fullsize">
+            <div class="modal-content modal-fullsize">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">타이틀</h5>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+            </div>
+          </div>
+        </div>
+
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" src="static/js/zvalue.js?ver=20"></script>
+    <script type="text/javascript" src="static/js/zvalue.js?ver=30"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/modal.js"></script>
 </body>
 </html>
