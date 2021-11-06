@@ -29,6 +29,18 @@ def user(usr):
 
     more_than_3_res_type = True if (len(prob_res) >= 3) else False
 
+    if more_than_3_res_type:
+        test = sorted_prob_res[0][1]
+        prob1 = test
+        test = sorted_prob_res[1][1]
+        prob2 = test
+        test = sorted_prob_res[2][1]
+        prob3 = test
+    else:
+        prob1 = 0
+        prob2 = 0
+        prob3 = 0
+
     avg_res = avg_response(user_data)  # 전체 평균 응답 횟수
     avg_len = avg_response_length(user_data)  # 전체 평균 응답 길이
     avg_prob = avg_probability_to_response(user_data)  # 전체 평균 응답률
@@ -45,6 +57,17 @@ def user(usr):
         total_programs += program_times[p]
     if len_programs >= 3:
         preference = program_preference(user_data, sorted_program_days[0][0])
+        test = program_days[sorted_program_days[0][0]]
+        day1 = test
+        test = program_days[sorted_program_days[1][0]]
+        day2 = test
+        test = program_days[sorted_program_days[2][0]]
+        day3 = test
+        day_others = 0
+        if len_programs >= 4:
+            for i in range(3, len_programs):
+                day_others += sorted_program_days[3][1]
+            day_others = round(day_others / (len_programs - 3), 2)
 
     # 활동량
     exer = exercise(usr)
@@ -76,8 +99,9 @@ def user(usr):
                            num_res=num_res, len_res=len_res,
                            prob_res=sorted_prob_res, prob_res2=avg_prob_res, more_than_3_res_type=more_than_3_res_type,
                            avg_res=avg_res, avg_len=avg_len, avg_prob=avg_prob,
+                           prob1=prob1, prob2=prob2, prob3=prob3,
                            programs=sorted_program_days, len_programs=len_programs, program_days=program_days,
-                           preference=preference,
+                           day1=day1, day2=day2, day3=day3, day_others=day_others, preference=preference,
                            total_programs=total_programs, avg_programs=avg_participation,
                            exer=exer, exermean=exermean, exerMent=exerMent, zValueSc=zValueSc, goout=goout,
                            gooutMean=gooutMean,

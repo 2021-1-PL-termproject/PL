@@ -150,6 +150,7 @@ input[id*="open"] + label {
 
 /*---순이대화---*/
 .suni {
+  position: relative;
   padding: 30px;
 }
 .suni div.para {
@@ -159,17 +160,48 @@ input[id*="open"] + label {
   font-size: 18px;
   font-weight: bold;
 }
-.suni .bar-graph span {
-  display: block;
-  height: 40px;
-  border-radius: 40px;
-  background-color: gray;
+/*그래프*/
+.suni .bar-graph {
+  display: grid;
+  grid-template-columns: 100px 400px;
+  grid-template-rows: 20px 1fr;
+  grid-gap: 10px;
+}
+.suni .bar-graph .bar-graph-title{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  text-align: center;
+}
+.suni .bar-graph .bar-graph-label{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  align-self: end;
+  align-self: stretch;
   text-align: right;
+  line-height: 40px;
+}
+.suni .bar-graph .bar-graph-bar{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  align-self: stretch;
 }
 canvas#response-prob {
   display: block;
-  width: 300px;
+  width: 400px;
   height: 150px;
+  align-items: center;
+}
+
+canvas#participation-days {
+  display: block;
+  width: 400px;
+  height: 205px;
   align-items: center;
 }
 

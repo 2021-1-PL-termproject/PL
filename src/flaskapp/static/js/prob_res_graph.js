@@ -1,42 +1,8 @@
 var canvas = document.getElementById("response-prob");
 var ctx = canvas.getContext("2d");
-var width = canvas.width;
+var width = 300;
 var height = 40;
 var radius = 20;
-
-//test
-ctx.beginPath();
-ctx.arc(75, 75, 20, 0.5*Math.PI, 1.5*Math.PI, false);
-ctx.moveTo(75, 55);
-ctx.lineTo(width, 55);
-ctx.arc(width-20, 75, 20, 1.5*Math.PI, 0.5*Math.PI, false);
-ctx.moveTo(width-20, 95);
-ctx.lineTo(75, 95);
-ctx.lineTo(75, 55);
-ctx.fillStyle = "gray";
-ctx.fill();
-ctx.closePath();
-
-// test
-var a = getFirst();
-ctx.beginPath();
-ctx.font = "16px malgun gothic";
-ctx.textBaseline = "middle";
-ctx.textAlign = "left";
-ctx.fillStyle = "black";
-ctx.fillText(a, 30, 0);
-ctx.fillText(typeof(a), 30, 20);
-ctx.closePath();
-
-var a = getFirst();
-ctx.beginPath();
-ctx.font = "16px malgun gothic";
-ctx.textBaseline = "middle";
-ctx.textAlign = "left";
-ctx.fillStyle = "black";
-ctx.fillText(a, 30, 0);
-ctx.fillText(typeof(a), 30, 20);
-ctx.closePath();
 
 drawGraph();
 
@@ -52,25 +18,10 @@ function getThird(){
     return prob3;
 }
 
-function getFirstName(){
-    return prob11;
-}
-
-function getSecondName(){
-    return prob21;
-}
-
-function getThirdName(){
-    return prob31;
-}
-
 function drawGraph(){
     var first = getFirst();
     var second = getSecond();
     var third = getThird();
-    var first_name = getFirstName();
-    var second_name = getSecondName();
-    var third_name = getThirdName();
 
     // first bar
     ctx.beginPath();
@@ -86,11 +37,9 @@ function drawGraph(){
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.font = "16px malgun gothic";
-    ctx.textBaseline = "middle";
-    ctx.textAlign = "left";
+    ctx.font = '12px malgun gothic'
     ctx.fillStyle = "black";
-    ctx.fillText(first_name, first*width, 20);
+    ctx.fillText(parseInt(first*100) + "%", first*width + 10, radius);
     ctx.closePath();
 
     // second bar
@@ -107,11 +56,9 @@ function drawGraph(){
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.font = "16px malgun gothic";
-    ctx.textBaseline = "middle";
-    ctx.textAlign = "left";
+    ctx.font = '12px malgun gothic'
     ctx.fillStyle = "black";
-    ctx.fillText(second_name, second*width, 20);
+    ctx.fillText(parseInt(second*100) + "%", second*width + 10, 55+radius);
     ctx.closePath();
 
     // third bar
@@ -128,10 +75,8 @@ function drawGraph(){
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.font = "16px malgun gothic";
-    ctx.textBaseline = "middle";
-    ctx.textAlign = "left";
+    ctx.font = '12px malgun gothic'
     ctx.fillStyle = "black";
-    ctx.fillText(third_name, third*width, 20);
+    ctx.fillText(parseInt(third*100) + "%", third*width + 10, 110+radius);
     ctx.closePath();
 }
