@@ -1,10 +1,11 @@
-.modal-dialog.modal-fullsize{
-  width: 100%;
-  height: 100%;
+.modal-dialog{
+  width: 500;
+  height: 500;
   margin: 0;
   padding: 0;
 }
-.modal-content.modal-fullsize{
+
+.modal-content{
   height: auto;
   min-height: 100%;
   border-radius: 0;
