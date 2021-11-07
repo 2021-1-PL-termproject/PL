@@ -134,7 +134,7 @@ input[id*="open"] + label {
   grid-row-end: 4;
   text-align: left;
   font-size: 18px;
-  padding: 0px;
+  padding: 10px 0px;
 }
 
 .canvas,
