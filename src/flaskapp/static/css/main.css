@@ -321,7 +321,7 @@ canvas#participation-days {
   border: 1px solid black;
   border-radius: 10px;
   margin-left: 10px;
-  transform: translate(0, -50px);
+  transform: translate(0, -150px);
 }
 hr {
   border: 1px solid black;
