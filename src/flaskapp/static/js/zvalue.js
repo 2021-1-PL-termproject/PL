@@ -3,6 +3,7 @@ google.charts.setOnLoadCallback(drawMultSeries1);
 google.charts.setOnLoadCallback(drawMultSeries2);
 google.charts.setOnLoadCallback(drawMultSeries3);
 
+
 function drawMultSeries1() {
   var data = google.visualization.arrayToDataTable([
     ["활동성", "감지 횟수"],
@@ -86,3 +87,27 @@ function drawMultSeries3() {
   );
   chart.draw(data, options);
 }
+
+
+google.charts.setOnLoadCallback(drawChart1);
+      function drawChart1() {
+        var data = google.visualization.arrayToDataTable([
+            ['활동성', '감지 횟수'],
+            ["부동",     A],
+            ["미동",      B],
+            ["활동",  C],
+            ["매우 활동", D]
+        ]);
+
+      var options = {
+        legend: 'none',
+        pieSliceText: 'label',
+        title: '',
+        pieStartAngle: 100,
+        width:250,
+        height:250
+      };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart1'));
+        chart.draw(data, options);
+      }

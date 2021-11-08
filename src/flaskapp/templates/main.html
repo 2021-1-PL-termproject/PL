@@ -327,14 +327,44 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">순이의 건강 리포트</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                     <div class="modal_container">
-                        <div class="grid-total">1</div>
-                        <div class="grid-profile1">2</div>
-                        <div class="grid-activity1">3</div>
+                        <div class="grid-total">{{ total_score }}점</div>
+                        <div class="grid-profile1">
+                            ID: {{usr}}
+                            {{name}}님
+                        </div>
+                        <div class="grid-activity1">
+                          <div class="act-score">
+                                <p class="actscorename">활동성</p>
+                                <hr />
+                                <p class="actscore-val"><span id="actscore">{{acttotal}}</span>점</p>
+                          </div>
+                          <div class="act_part1">
+                              <div id="donutchart1" ></div>
+                              <div id = "inside">
+                                  {% if zvaluemean < zall %}
+                                    실내 활동량이 <span>부족</span>해요
+                                  {% else %}
+                                    실내 활동량이 <span>적절</span>해요
+                                  {% endif %}
+                              </div>
+                          </div>
+                          <div class="act_part2">
+                              <img id="oldman" src="static/image1/oldman.jpg">
+                          </div>
+                          <div id = "inside2">
+                              <b>한달동안</b><br>
+                              실내운동 <b>{{exer[0]}}회</b><br>
+                              실외운동 <b>{{exer[1]}}회</b><br>
+                          </div>
+                          <div id="inside3">
+                              외출 <b>{{goout}}회</b>
+                          </div>
+                        </div>
                         <div class="grid-lifepattern1">
                             <div class="circle-container">
                                 <div class='center'>
@@ -392,7 +422,8 @@
                                 <div class='deg195' style="transform: rotate(195deg) translate(17em) rotate(-195deg)">
                                     <div class="dinnerreport">
                                         {% if dm == 'No data' %}
-                                            {{name}}님은 저녁을 드신 기록이 없어요.<br>
+                                            {{name}}님은<br>
+                                            저녁을 드신 기록이 없어요.<br>
                                         {% else %}
                                             {{name}}님은 저녁을<br>
                                             {{dm.split(':')[0]}}시 {{dm.split(':')[1]}}분 {{dm.split(':')[2]}}초에 드세요.<br>
