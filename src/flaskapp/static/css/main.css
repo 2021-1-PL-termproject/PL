@@ -345,7 +345,7 @@ hr {
 .grid-suni1 {
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(3, 30px) 5px repeat(4, 100px);
+  grid-template-columns: repeat(3, 30px) 10px repeat(7, 100px);
   grid-template-rows: 30px 60px 5px 30px 40px 5px 30px 40px 5px 30px 40px;
 
   margin: 0px;
@@ -372,7 +372,7 @@ hr {
   border-bottom: 1px solid black;
 }
 
-#unit01{
+#unit01 {
   font-size: 16px;
 }
 
@@ -397,7 +397,7 @@ hr {
 .suni-total-comment {
   /*조언*/
   grid-column-start: 5;
-  grid-column-end: 9;
+  grid-column-end: 10;
   grid-row-start: 1;
   grid-row-end: 3;
 
@@ -413,56 +413,56 @@ hr {
   text-align: center;
   color: rgba(0, 0, 0, 0);
 }
-.suni-conv-score {
-  /*대화점수*/
-  margin: 0px;
-  border: 1px solid black;
-  border-radius: 10px;
-
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 4;
-  grid-row-end: 6;
-}
-.suni-conv-score .score-title {
-  border-bottom: 1px solid black;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 4;
-  grid-row-end: 5;
-}
-.suni-conv-score .score-value {
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 5;
-  grid-row-end: 6;
-  align-self: center;
-}
 .grid-suni1 .blank03 {
-  grid-column-start: 3;
+  grid-column-start: 1;
   grid-column-end: 5;
   grid-row-start: 4;
   grid-row-end: 6;
   text-align: center;
   color: rgba(0, 0, 0, 0);
 }
-#conv-details-1 {
-  /*대화횟수*/
+.suni-conv-score {
+  /*대화점수*/
   margin: 0px;
+  border: 1px solid black;
+  border-radius: 10px;
+
   grid-column-start: 5;
   grid-column-end: 6;
   grid-row-start: 4;
   grid-row-end: 6;
 }
-[class^="details-title"] {  
-  font-size: 12px;
+.suni-conv-score .score-title {
+  border-bottom: 1px solid black;
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+.suni-conv-score .score-value {
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 5;
+  grid-row-end: 6;
+  align-self: center;
+}
+#conv-details-1 {
+  /*대화횟수*/
+  margin: 0px;
+  grid-column-start: 6;
+  grid-column-end: 8;
+  grid-row-start: 4;
+  grid-row-end: 6;
+}
+[class^="details-title"] {
+  font-size: 14px;
 }
 #conv-details-1 .details-title1 {
   display: block;
   margin: 0px;
   border-bottom: 1px solid black;
-  grid-column-start: 5;
-  grid-column-end: 6;
+  grid-column-start: 6;
+  grid-column-end: 8;
   grid-row-start: 4;
   grid-row-end: 5;
 
@@ -471,8 +471,8 @@ hr {
 #conv-details-1 .details-value1 {
   display: block;
   margin: 0px;
-  grid-column-start: 5;
-  grid-column-end: 6;
+  grid-column-start: 6;
+  grid-column-end: 8;
   grid-row-start: 5;
   grid-row-end: 6;
   align-self: center;
@@ -480,8 +480,8 @@ hr {
 #conv-details-2 {
   /*응답률*/
   margin: 0px;
-  grid-column-start: 6;
-  grid-column-end: 7;
+  grid-column-start: 8;
+  grid-column-end: 10;
   grid-row-start: 4;
   grid-row-end: 6;
 }
@@ -489,36 +489,44 @@ hr {
   display: block;
   margin: 0px;
   border-bottom: 1px solid black;
-  grid-column-start: 6;
-  grid-column-end: 7;
+  grid-column-start: 8;
+  grid-column-end: 10;
   grid-row-start: 4;
   grid-row-end: 5;
 }
 #conv-details-2 .details-value2 {
   display: block;
   margin: 0px;
-  grid-column-start: 6;
-  grid-column-end: 7;
+  grid-column-start: 8;
+  grid-column-end: 10;
   grid-row-start: 5;
   grid-row-end: 6;
   align-self: center;
 }
 .grid-suni1 .blank04 {
   grid-column-start: 1;
-  grid-column-end: 9;
+  grid-column-end: 11;
   grid-row-start: 6;
   grid-row-end: 7;
   text-align: center;
   color: rgba(0, 0, 0, 0);
 }
+.grid-suni1 .blank05 {
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 7;
+  grid-row-end: 9;
+  text-align: center;
+  color: rgba(0, 0, 0, 0);
+}
 .suni-program-score {
-  /*참여 점수*/
+  /*프로그램 점수*/
   margin: 0px;
   border: 1px solid black;
   border-radius: 10px;
 
-  grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-start: 5;
+  grid-column-end: 6;
   grid-row-start: 7;
   grid-row-end: 9;
 }
@@ -527,47 +535,39 @@ hr {
   margin: 0px;
   border-bottom: 1px solid black;
 
-  grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-start: 5;
+  grid-column-end: 6;
   grid-row-start: 7;
   grid-row-end: 8;
 }
 .suni-program-score .score-value {
   margin: 0px;
-  grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-start: 5;
+  grid-column-end: 6;
   grid-row-start: 8;
   grid-row-end: 9;
   align-self: center;
 }
-.grid-suni1 .blank05 {
-  grid-column-start: 3;
-  grid-column-end: 5;
-  grid-row-start: 7;
-  grid-row-end: 9;
-  text-align: center;
-  color: rgba(0, 0, 0, 0);
-}
 #program-details-1 {
   /*참여 횟수*/
   margin: 0px;
-  grid-column-start: 5;
-  grid-column-end: 6;
+  grid-column-start: 6;
+  grid-column-end: 8;
   grid-row-start: 7;
   grid-row-end: 9;
 }
 #program-details-1 .details-title1 {
   margin: 0px;
   border-bottom: 1px solid black;
-  grid-column-start: 5;
-  grid-column-end: 6;
+  grid-column-start: 6;
+  grid-column-end: 8;
   grid-row-start: 7;
   grid-row-end: 8;
 }
 #program-details-1 .details-value1 {
   margin: 0px;
-  grid-column-start: 5;
-  grid-column-end: 6;
+  grid-column-start: 6;
+  grid-column-end: 8;
   grid-row-start: 8;
   grid-row-end: 9;
   display: block;
@@ -576,23 +576,23 @@ hr {
 #program-details-2 {
   /*종류*/
   margin: 0px;
-  grid-column-start: 6;
-  grid-column-end: 7;
+  grid-column-start: 8;
+  grid-column-end: 10;
   grid-row-start: 7;
   grid-row-end: 9;
 }
 #program-details-2 .details-title2 {
   margin: 0px;
   border-bottom: 1px solid black;
-  grid-column-start: 6;
-  grid-column-end: 7;
+  grid-column-start: 8;
+  grid-column-end: 10;
   grid-row-start: 7;
   grid-row-end: 8;
 }
 #program-details-2 .details-value2 {
   margin: 0px;
-  grid-column-start: 6;
-  grid-column-end: 7;
+  grid-column-start: 8;
+  grid-column-end: 10;
   grid-row-start: 8;
   grid-row-end: 9;
   display: block;
@@ -600,7 +600,7 @@ hr {
 }
 .grid-suni1 .blank06 {
   grid-column-start: 1;
-  grid-column-end: 9;
+  grid-column-end: 10;
   grid-row-start: 9;
   grid-row-end: 10;
   text-align: center;
@@ -608,7 +608,7 @@ hr {
 }
 .grid-suni1 .blank07 {
   grid-column-start: 1;
-  grid-column-end: 5;
+  grid-column-end: 6;
   grid-row-start: 10;
   grid-row-end: 12;
   text-align: center;
@@ -616,26 +616,26 @@ hr {
 }
 #program-details2-1 {
   margin: 0px;
-  grid-column-start: 5;
-  grid-column-end: 6;
+  grid-column-start: 6;
+  grid-column-end: 7;
   grid-row-start: 10;
   grid-row-end: 12;
 }
-[class^="details2-title"] {  
+[class^="details2-title"] {
   font-size: 12px;
 }
 #program-details2-1 .details2-title1 {
   margin: 0px;
   border-bottom: 1px solid black;
-  grid-column-start: 5;
-  grid-column-end: 6;
+  grid-column-start: 6;
+  grid-column-end: 7;
   grid-row-start: 10;
   grid-row-end: 11;
 }
 #program-details2-1 .details2-value1 {
   margin: 0px;
-  grid-column-start: 5;
-  grid-column-end: 6;
+  grid-column-start: 6;
+  grid-column-end: 7;
   grid-row-start: 11;
   grid-row-end: 12;
   display: block;
@@ -643,23 +643,23 @@ hr {
 }
 #program-details2-2 {
   margin: 0px;
-  grid-column-start: 6;
-  grid-column-end: 7;
+  grid-column-start: 7;
+  grid-column-end: 8;
   grid-row-start: 10;
   grid-row-end: 12;
 }
 #program-details2-2 .details2-title2 {
   margin: 0px;
   border-bottom: 1px solid black;
-  grid-column-start: 6;
-  grid-column-end: 7;
+  grid-column-start: 7;
+  grid-column-end: 8;
   grid-row-start: 10;
   grid-row-end: 11;
 }
 #program-details2-2 .details2-value2 {
   margin: 0px;
-  grid-column-start: 6;
-  grid-column-end: 7;
+  grid-column-start: 7;
+  grid-column-end: 8;
   grid-row-start: 11;
   grid-row-end: 12;
   display: block;
@@ -667,23 +667,23 @@ hr {
 }
 #program-details2-3 {
   margin: 0px;
-  grid-column-start: 7;
-  grid-column-end: 8;
+  grid-column-start: 8;
+  grid-column-end: 9;
   grid-row-start: 10;
   grid-row-end: 12;
 }
-#program-details2-3 .details2-title3{
+#program-details2-3 .details2-title3 {
   margin: 0px;
   border-bottom: 1px solid black;
-  grid-column-start: 7;
-  grid-column-end: 8;
+  grid-column-start: 8;
+  grid-column-end: 9;
   grid-row-start: 10;
   grid-row-end: 11;
 }
-#program-details2-3 .details2-value3{
+#program-details2-3 .details2-value3 {
   margin: 0px;
-  grid-column-start: 7;
-  grid-column-end: 8;
+  grid-column-start: 8;
+  grid-column-end: 9;
   grid-row-start: 11;
   grid-row-end: 12;
   display: block;
@@ -691,23 +691,23 @@ hr {
 }
 #program-details2-4 {
   margin: 0px;
-  grid-column-start: 8;
-  grid-column-end: 9;
+  grid-column-start: 9;
+  grid-column-end: 10;
   grid-row-start: 10;
   grid-row-end: 12;
 }
-#program-details2-4 .details2-title4{
+#program-details2-4 .details2-title4 {
   margin: 0px;
   border-bottom: 1px solid black;
-  grid-column-start: 8;
-  grid-column-end: 9;
+  grid-column-start: 9;
+  grid-column-end: 10;
   grid-row-start: 10;
   grid-row-end: 11;
 }
-#program-details2-4 .details2-value4{
+#program-details2-4 .details2-value4 {
   margin: 0px;
-  grid-column-start: 8;
-  grid-column-end: 9;
+  grid-column-start: 9;
+  grid-column-end: 10;
   grid-row-start: 11;
   grid-row-end: 12;
   display: block;

@@ -442,7 +442,11 @@
                             </div>
                             <div id="conv-details-2">
                                 <p class="details-title2">응답률</p>
-                                <p class="details-value2">{{avg_prob_res}}%</p>
+                                {% if num_res > 0 %}
+                                    <p class="details-value2">{{avg_prob_res}}%</p>
+                                {% else %}
+                                    <p class="details-value2">0%</p>
+                                {% endif %}
                             </div>
                             <div class="blank04">.</div>
                             <div class="suni-program-score">
@@ -461,20 +465,40 @@
                             <div class="blank06">.</div>
                             <div class="blank07">.</div>
                             <div id="program-details2-1">
-                                <p class="details2-title1">{{programs[0][0]}}</p>
-                                <p class="details2-value1">{{day1}}회</p>
+                                {% if len_programs >= 3 %}
+                                    <p class="details2-title1">{{programs[0][0]}}</p>
+                                    <p class="details2-value1">{{day1}}회</p>
+                                {% else %}
+                                    <p class="details2-title1">No Data</p>
+                                    <p class="details2-value1">-</p>
+                                {% endif %}
                             </div>
                             <div id="program-details2-2">
-                                <p class="details2-title2">{{programs[1][0]}}</p>
-                                <p class="details2-value2">{{day2}}회</p>
+                                {% if len_programs >= 3 %}
+                                    <p class="details2-title2">{{programs[1][0]}}</p>
+                                    <p class="details2-value2">{{day2}}회</p>
+                                {% else %}
+                                    <p class="details2-title1">No Data</p>
+                                    <p class="details2-value1">-</p>
+                                {% endif %}
                             </div>
                             <div id="program-details2-3">
-                                <p class="details2-title3">{{programs[2][0]}}</p>
-                                <p class="details2-value3">{{day3}}회</p>
+                                {% if len_programs >= 3 %}
+                                    <p class="details2-title3">{{programs[2][0]}}</p>
+                                    <p class="details2-value3">{{day3}}회</p>
+                                {% else %}
+                                    <p class="details2-title1">No Data</p>
+                                    <p class="details2-value1">-</p>
+                                {% endif %}
                             </div>
                             <div id="program-details2-4">
-                                <p class="details2-title4">기타</p>
-                                <p class="details2-value4">{{day_others}}회</p>
+                                {% if len_programs >= 3 %}
+                                    <p class="details2-title4">기타</p>
+                                    <p class="details2-value4">{{day_others}}회</p>
+                                {% else %}
+                                    <p class="details2-title1">No Data</p>
+                                    <p class="details2-value1">-</p>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
