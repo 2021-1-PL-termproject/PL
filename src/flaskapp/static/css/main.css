@@ -333,7 +333,7 @@ canvas#participation-days {
   grid-column-end: 4;
   grid-row-start: 2;
   grid-row-end: 3;
-
+  /**/
   margin: 0px;
 }
 .grid-suni1 .blank01 {
