@@ -321,7 +321,7 @@ canvas#participation-days {
   border: 1px solid black;
   border-radius: 10px;
   margin-left: 10px;
-  transform: translate(0, -50px);
+  transform: translate(0, -150px);
 }
 hr {
   border: 1px solid black;
@@ -712,4 +712,74 @@ hr {
   grid-row-end: 12;
   display: block;
   align-self: center;
+}
+.grid-activity1{
+    display: flex;
+    border: 3px solid rgba(black, .1);
+    gap: 10px;
+}
+.act_part1{
+    justify-self:start;
+}
+#inside{
+    margin-left: 40px;
+}
+
+.act_part2{
+    margin-left: 30px;
+}
+
+
+.act_part1 span{
+  font-size: 18px;
+  font-weight: bold;
+  white-space:nowrap;
+}
+#inside2 b{
+  font-size: 18px;
+  font-weight: bold;
+  white-space:nowrap;
+}
+#inside2{
+align-self: center;
+}
+#inside3{
+align-self: center;
+}
+#inside3 b{
+  font-size: 18px;
+  font-weight: bold;
+  white-space:nowrap;
+}
+
+
+#oldman{
+    margin-top: 10px;
+    width: 100px;
+    height: 200px;
+    justify-self:start;
+}
+.actscorename {
+  text-align: center;
+  vertical-align: middle;
+  height: 10px;
+}
+
+.act-score{
+    border: 1px solid black;
+     border-radius: 10px;
+     width: 100px;
+     height: 100px;
+     align-self: center;
+}
+
+#actscore{
+font-size: xx-large;
+  font-weight: bold;
+}
+.actscore-val{
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  height: 40px;
 }

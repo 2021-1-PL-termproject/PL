@@ -88,29 +88,47 @@ def zValue(id):
 
 #Zvalue 점수화
 def zValueScore(id):
-    data = openData(id)
-    out = data["State"].isin(["외출하기"])
-    data = data[~out]
-    Zcolumn = data['Z'].value_counts()
-    zcolumn = Zcolumn.rename_axis('AA').reset_index(name='counts')
-    if ((zcolumn['AA'] == "부동").any()):
-        A = Zcolumn["부동"]
+    if (date(id) == "no Data"):
+        return 0
     else:
-        A = 0
-    if ((zcolumn['AA'] == "미동").any()):
-        B = Zcolumn["미동"]
+        data = openData(id)
+        out = data["State"].isin(["외출하기"])
+        data = data[~out]
+        Zcolumn = data['Z'].value_counts()
+        zcolumn = Zcolumn.rename_axis('AA').reset_index(name='counts')
+        if ((zcolumn['AA'] == "부동").any()):
+            A = Zcolumn["부동"]
+        else:
+            A = 0
+        if ((zcolumn['AA'] == "미동").any()):
+            B = Zcolumn["미동"]
+        else:
+            B = 0
+        if ((zcolumn['AA'] == "활동").any()):
+            C = Zcolumn["활동"]
+        else:
+            C = 0
+        if ((zcolumn['AA'] == "매우 활동").any()):
+            D = Zcolumn["매우 활동"]
+        else:
+            D = 0
+        X = A * 0 + B * 1 + C * 2 + D * 3
+        return X
+
+#누적점수 평균
+def zValueMean(id):
+    if (date(id) == "no Data"):
+        return 0
     else:
-        B = 0
-    if ((zcolumn['AA'] == "활동").any()):
-        C = Zcolumn["활동"]
-    else:
-        C = 0
-    if ((zcolumn['AA'] == "매우 활동").any()):
-        D = Zcolumn["매우 활동"]
-    else:
-        D = 0
-    X = A * 0 + B * 1 + C * 2 + D * 3
-    return X
+        X = zValueScore(id)
+        return round(int(X)/date(id), 2)
+
+def zValueAll():
+    data = openID()
+    x = 0.0
+    for i in range(len(data)):
+        x += zValueMean(data.iloc[i]["id"])
+    return round(x / len(data), 1)
 
 #단순 외출 횟수
 def goOut(id):
@@ -133,7 +151,7 @@ def goOutAll():
     x = 0.0
     for i in range(len(data)):
         x += goOutMean(data.iloc[i]["id"])
-    return x / len(data)
+    return round(x / len(data), 1)
 
 
 
@@ -158,3 +176,41 @@ def date(id):
         if((data.iloc[i,1][9:11] not in dateCount)):
             dateCount.append(data.iloc[i,1][9:11])
     return len(dateCount)
+
+
+def actTotalScore(id):
+    if (exerciseMean(id)>0.7):
+        X = 100
+    elif(exerciseMean(id)>0.5):
+        X = 80
+    elif(exerciseMean(id)>0.3):
+        X = 70
+    elif (exerciseMean(id) > 0.1):
+        X = 30
+    else:
+        X = 0
+
+    if (goOutMean(id) > 0.8):
+        Y = 100
+    elif (goOutMean(id) > 0.6):
+        Y = 80
+    elif (goOutMean(id) > 0.3):
+        Y = 70
+    elif (goOutMean(id) > 0.1):
+        Y = 30
+    else:
+        Y = 0
+
+    cri = zValueAll()
+    if (zValueMean(id) > cri * 1.2):
+        Z = 100
+    elif (zValueMean(id) > cri * 0.9):
+        Z = 80
+    elif(zValueMean(id) > cri * 0.6):
+        Z = 50
+    elif(zValueMean(id) > cri * 0.3):
+        Z = 30
+    else:
+        Z = 0
+    return round((X + Y + Z) / 3)
+
