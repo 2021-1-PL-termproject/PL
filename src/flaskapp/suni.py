@@ -2,6 +2,7 @@ import pandas as pd
 import operator
 
 
+# --- 데이터 관련 ---
 def read_data(user_profile, path):
     """
     This function load user data to a dictionary.
@@ -20,48 +21,37 @@ def read_data(user_profile, path):
     return user_data
 
 
-def is_valid_user(user_id, user_profile):
+def trim_data(user_data, start_date, end_date):
     """
-    This function checks whether the user is in the user_profile data.
-    :param user_id: (int) id of user
-    :param user_profile: (pandas dataframe) user profile data from spreadsheet file
-    :return: (bool) True if given id is in the data
-
-    +) xlsx 파일 읽으려면 openpyxl 필요함.
-    """
-    num_users = len(user_profile["id"])
-    valid = False
-    for i in range(num_users):
-        if user_profile["id"][i] == user_id:
-            valid = True
-    return valid
-
-
-def slice_data(data, start_date, end_date):
-    """
-    This function slices user data by given time
-    :param data: (pandas dataframe) whole user data
+    This function slices user data to given time period(start_date ~ end_date)
+    :param data: dictionary that contains user data (key = user id)
     :param start_date: (int) start date to cut
     :param end_date: (int) end date to cut
     :return: (pandas dataframe) trimmed data
     """
-    # create empty dataframe to save slices
-    trimmed = pd.DataFrame({})
-    for date in range(start_date, end_date + 1):
-        # make date to string format
-        if date < 10:
-            d = "2021-08-0" + str(date)
-        else:
-            d = "2021-08-" + str(date)
-        # cut data
-        cur_t = data.loc[data["Time"].str.contains(d)]
-        # concatenate previous slices
-        t = pd.concat([t, cur_t])
-    # reset index
-    trimmed = trimmed.reset_index(drop=True)
-    return trimmed
+    trimmed_data = {}
+    for user in user_data:
+        # create empty dataframe to save slices
+        trimmed = pd.DataFrame({})
+        for date in range(start_date, end_date + 1):
+            # make date to string format
+            if date < 10:
+                d = "2021-08-0" + str(date)
+            else:
+                d = "2021-08-" + str(date)
+            # cut data
+            cur_t = user_data[user].loc[user_data[user]
+                                        ["Time"].str.contains(d)]
+            # concatenate previous slices
+            t = pd.concat([t, cur_t])
+        # reset index
+        trimmed = trimmed.reset_index(drop=True)
+        trimmed_data[user] = trimmed
+    return trimmed_data
 
 
+# --- 순이 대화 관련 ---
+# 응답 횟수
 def num_response(data):
     """
     This function counts the number of response the AI gets from the user.
@@ -79,6 +69,31 @@ def num_response(data):
     return num_res
 
 
+def avg_response(user_data):
+    """
+    This function calculates average number of responses of whole users.
+    :param user_data: dictionary that contains user data (key = user id)
+    :return: (float) the average number of responses of whole users
+    """
+    total_response = 0
+    for user in user_data:
+        total_response += num_response(user_data[user])
+    return round((total_response / len(user_data.keys())), 2)
+
+def std_response(user_data):
+    """
+    This function calculates standard deviation of user responses of whole users.
+    :param user_data: dictionary that contains user data (key = user id)
+    :return: (float) the standard deviation of responses of whole users
+    """
+    var = 0
+    avg = avg_response(user_data)
+    for user in user_data:
+        var += (num_response(user_data[user]) - avg)**2
+    var /= len(user_data.keys())
+    return round(var**(1/2), 2)
+
+# 응답 길이
 def len_response(data):
     """
     This function calculates average length of user responses
@@ -106,68 +121,19 @@ def len_response(data):
     return round(avg, 2)
 
 
-def participated_program(data):
+def avg_response_length(user_data):
     """
-    This function returns list of programs the user participated.
-    The list includes tuples of (program_names, number of participation), in descending order.
-    requirement: (library)operator
-    :param data: (pandas dataframe) dataframe to analyze
-    :return: (list) list of programs with the number of participation (in descending order)
+    This function calculates average number of word segments in the responses of whole users.
+    :param user_data: dictionary that contains user data (key = user id)
+    :return: (float) the average number of word segments in the response of whole users.
     """
-    program = {}
-    for i in range(len(data)):
-        if data["Z"][i] == "프로그램":
-            if data["State"][i] in program:
-                program[data["State"][i]] += 1
-            else:
-                program[data["State"][i]] = 1
-    sorted_program = sorted(program.items(), key=operator.itemgetter(1), reverse=True)
-    return sorted_program
+    total_length = 0
+    for user in user_data:
+        total_length += len_response(user_data[user])
+    return round((total_length / len(user_data.keys())), 2)
 
 
-def participated_program2(data):
-    """
-    This function returns list of programs the user participated.
-    The list includes tuples of (program_names, number of participated days), in descending order.
-    requirement: (library)operator
-    :param data: (pandas dataframe) dataframe to analyze
-    :return: (list) list of programs with the number of participated days (in descending order)
-    """
-    # count days
-    program = {}
-    for i in range(len(data)):
-        if data["Z"][i] == "프로그램":
-            date = data["Time"][i][1:11]
-            if data["State"][i] in program:
-                program[data["State"][i]].add(date)
-            else:
-                program[data["State"][i]] = {date}
-
-    # change set of dates to number of participated days
-    for item in program:
-        program[item] = len(program[item])
-    sorted_program = sorted(program.items(), key=operator.itemgetter(1), reverse=True)
-    return sorted_program
-
-
-def extract_user_name(data):
-    """
-    This function extract user name from system message.
-    :param data: (pandas dataframe) dataframe to analyze
-    :return: (str) name of the user (Default: "Unknown")
-    """
-    msg = ""
-    for i in range(len(data["Sequence"])):
-        if not pd.isna(data["Sequence"][i]):
-            if data["Sequence"][i][0] == "C":
-                msg = data["Message_1"][i]
-                break
-    if msg == "":
-        return "Unknown"    # Default name
-    else:
-        return msg.split("님")[0].split().pop()
-
-
+# 응답률
 def probability_to_response_to_action(data, col="State"):
     """
     This function calculates probability of user response to each actions.
@@ -209,10 +175,26 @@ def probability_to_response_to_action(data, col="State"):
     for item in num_action:
         if num_action[item] >= 5:  # refine data
             prob_response[item] = round(response[item] / num_action[item], 2)
-    sorted_prob = sorted(prob_response.items(), key=operator.itemgetter(1), reverse=True)
-    return sorted_prob
+    sorted_prob = sorted(prob_response.items(),
+                         key=operator.itemgetter(1), reverse=True)
+    return prob_response, sorted_prob
 
 
+def avg_probability_to_response(user_data):
+    """
+    This function calculates average probability of user responses to whole actions.
+    :param user_data: dictionary that contains user data (key = user id)
+    :return: (float) the average probability of user responses to whole actions.
+    """
+    total_prob = 0
+    for user in user_data:
+        prob, _ = probability_to_response_to_action(user_data[user])
+        if len(prob) > 0:
+            total_prob += prob["전체"]
+    return round((total_prob / len(user_data.keys())), 2)
+
+
+# +) 메시지 유형 관련 분석 -> 리포트에는 표시 X
 def probability_to_response_to_msg(data):
     """
     This function calculates probability of user response to each message type.
@@ -253,7 +235,8 @@ def probability_to_response_to_msg(data):
     for item in num_msg:
         if num_msg[item] >= 5:   # refine data
             prob_response[item] = round(response[item] / num_msg[item], 2)
-    sorted_prob = sorted(prob_response.items(), key=operator.itemgetter(1), reverse=True)
+    sorted_prob = sorted(prob_response.items(),
+                         key=operator.itemgetter(1), reverse=True)
     return sorted_prob
 
 
@@ -298,97 +281,166 @@ def len_response_for_msg(data):
     return sorted_avg
 
 
-def avg_response(user_data):
+# --- 프로그램 관련 ---
+def participated_times(data):
     """
-    This function calculates average number of responses of whole users.
+    This function returns list of programs the user participated.
+    The list includes tuples of (program_names, number of participation), in descending order.
+    requirement: (library)operator
+    :param data: (pandas dataframe) dataframe to analyze
+    :return: (dict) the number of participation (key = program names)
+    """
+    program = {}
+    for i in range(len(data)):
+        if data["Z"][i] == "프로그램":
+            if data["State"][i] in program:
+                program[data["State"][i]] += 1
+            else:
+                program[data["State"][i]] = 1
+    return program
+
+def total_participation(data):
+    """
+    This function returns total program participation of the user
+    :param data: (pandas dataframe) dataframe to analyze
+    :return: (int) total number of program participation
+    """
+    num_participation = 0;
+    for i in range(len(data)):
+        if data["Z"][i] == "프로그램":
+            num_participation += 1;
+    return num_participation
+
+
+def avg_participation(user_data):
+    """
+    This function returns average total program participation of whole user.
     :param user_data: dictionary that contains user data (key = user id)
-    :return: (float) the average number of responses of whole users
+    :return: (float) average number of total participation
     """
-    total_response = 0
+    total = 0
     for user in user_data:
-        total_response += num_response(user_data[user])
-    return round((total_response / len(user_data.keys())), 2)
+        total += total_participation(user_data[user])
+    return round(total / len(user_data.keys()), 2)
 
 
-def avg_response_length(user_data):
+def std_participation(user_data):
     """
-    This function calculates average number of word segments in the responses of whole users.
+    This function returns standard deviation of total program participation of whold user.
     :param user_data: dictionary that contains user data (key = user id)
-    :return: (float) the average number of word segments in the response of whole users.
+    :return: (float) standard deviation of total participation
     """
-    total_length = 0
+    var = 0
+    avg = avg_participation(user_data)
     for user in user_data:
-        total_length += len_response(user_data[user])
-    return round((total_length / len(user_data.keys())), 2)
+        var += (total_participation(user_data[user]) - avg) ** 2
+    var /= len(user_data.keys())
+    return round(var ** (1/2), 2)
 
 
-def avg_probability_to_response(user_data):
+def participated_days(data):
     """
-    This function calculates average probability of user responses to whole actions.
+    This function returns list of programs the user participated.
+    The list includes tuples of (program_names, number of participated days), in descending order.
+    :param data: (pandas dataframe) dataframe to analyze
+    :return: (dict) the number of participated days (key = program names)
+             (list) list of programs with the number of participated days (in descending order)
+    """
+    # count days
+    program = {}
+    for i in range(len(data)):
+        if data["Z"][i] == "프로그램":
+            date = data["Time"][i][1:11]
+            if data["State"][i] in program:
+                program[data["State"][i]].add(date)
+            else:
+                program[data["State"][i]] = {date}
+
+    # change set of dates to number of participated days
+    for item in program:
+        program[item] = len(program[item])
+    sorted_program = sorted(
+        program.items(), key=operator.itemgetter(1), reverse=True)
+    return program, sorted_program
+
+
+def program_preference(user_data, program):
+    """
+    This function returns program preference of the user.
     :param user_data: dictionary that contains user data (key = user id)
-    :return: (float) the average probability of user responses to whole actions.
+    :param program: preffered program
+    :return: (list) other preferred programs (in descending order)
     """
-    total_prob = 0
+    preference = {}
+    preference["user"] = 0
     for user in user_data:
-        for (action, prob) in probability_to_response_to_action(user_data[user]):
-            if action == "전체":
-                total_prob += prob
-    return round((total_prob / len(user_data.keys())), 2)
+        program_times = participated_times(user_data[user])
+        program_days, sorted_program_days = participated_days(user_data[user])
+
+        # counts total participation time
+        total_participation = 0
+        for program in program_times:
+            total_participation += program_times[program]
+
+        if (total_participation >= 5) and (len(program_times) >= 3):
+            first = sorted_program_days[0][0]
+            second = sorted_program_days[1][0]
+            third = sorted_program_days[2][0]
+
+            if program in [first, second, third]:
+                # count user who prefers given program
+                preference["user"] += 1
+                for item in program_times:
+                    if item == program:
+                        pass
+                    elif item not in preference:
+                        preference[item] = program_times[item] / total_participation
+                    else:
+                        preference[item] += program_times[item] / total_participation
+
+    # refine data
+    if preference["user"] < 5:
+        # if the users who prefer given program, ignore the result
+        preference.clear()
+    else:
+        # delete user counts
+        del preference["user"]
+    return sorted(preference.items(), key=operator.itemgetter(1), reverse=True)
 
 
-def std_response(user_data):
+# --- 기타 ---
+def extract_user_name(data):
     """
-        This function calculates standard deviation of probability of user responses to whole actions.
-        :param user_data: dictionary that contains user data (key = user id)
-        :return: (float) the standard deviation of probability of user responses to whole actions.
+    This function extract user name from system message.
+    :param data: (pandas dataframe) dataframe to analyze
+    :return: (str) name of the user (Default: "Unknown")
     """
-    var_response = 0
-    avg = avg_response(user_data)
-    for user in user_data:
-        var_response += (num_response(user_data[user]) - avg)**2
-    return round(var_response**(1/2), 2)
+    msg = ""
+    for i in range(len(data["Sequence"])):
+        if not pd.isna(data["Sequence"][i]):
+            if data["Sequence"][i][0] == "C":
+                msg = data["Message_1"][i]
+                break
+    if msg == "":
+        return "Unknown"    # Default name
+    else:
+        return msg.split("님")[0].split().pop()
 
-
-def std_response_length(user_data):
+def zvalue(x, mean, std):
     """
-        This function calculates standard deviation of number of word segments in the responses of whole users.
-        :param user_data: dictionary that contains user data (key = user id)
-        :return: (float) the standard deviation of number of word segments in the response of whole users.
-    """
-    var_response_length = 0
-    avg = avg_response_length(user_data)
-    for user in user_data:
-        var_response_length += (len_response(user_data[user]) - avg)**2
-    return round(var_response_length**(1/2), 2)
-
-
-def std_probability_to_response(user_data):
-    """
-        This function calculates standard deviation of probability of user responses to whole actions.
-        :param user_data: dictionary that contains user data (key = user id)
-        :return: (float) the standard deviation of probability of user responses to whole actions.
-    """
-    var_prob = 0
-    avg = avg_probability_to_response(user_data)
-    for user in user_data:
-        for (action, prob) in probability_to_response_to_action(user_data[user]):
-            if action == "전체":
-                var_prob += (prob - avg)**2
-    return round(var_prob**(1/2), 2)
-
-
-def z_value(x, mean, std):
-    """
-    This function calculates Z-value of x
-    :param x: target to calculates Z-value
-    :param mean: mean of the data
-    :param std: standard deviation of the data
-    :return: (float) Z-value of x
+    This function calculates z-value of x
+    :param x: target
+    :param mean: mean of the data set
+    :param std: standard deviation of the data set
+    :return: (float) z-value of x
     """
     return round(((x - mean) / std), 2)
 
 
-
-
-
-
+def score(z_score):
+    """
+    This function convert z-value to health score
+    :param z_score: z-value of target
+    :return: (int) health score of given z-value (maximum = 100)
+    """
+    return round(min(40 * z_score + 50, 100))

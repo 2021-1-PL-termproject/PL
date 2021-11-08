@@ -9,6 +9,7 @@ def to_angle(time):
     angles = (int(time[0:2]) * 15) + (int(time[3:5]) * 0.25) + (int(time[6:]) / 240)
     return angles
 
+
 def angle_to_hms(angle):
     if angle == 'No data':
         return 'No data'
@@ -20,6 +21,7 @@ def angle_to_hms(angle):
         time = str(hours) + ":" + str(minutes) + ":" + str(seconds)
         return time
 
+
 def angle_dif(a, b):
     if a == 'No data' or b == 'No data':
         return 'No data'
@@ -28,9 +30,10 @@ def angle_dif(a, b):
             a = to_angle(a)
             if type(b) == str:
                 b = to_angle(b)
-        angle_difference = a- b
+        angle_difference = a - b
         angle_difference = (angle_difference + 180) % 360 - 180
         return angle_difference
+
 
 def std_of_angles(angles, mean):
     sum = 0
@@ -41,14 +44,16 @@ def std_of_angles(angles, mean):
     std = sqrt(sum / int(len(angles)))
     return std
 
+
 def mean_angle(deg):
-    return degrees(phase(sum(rect(1, radians(d)) for d in deg)/len(deg)))
- 
+    return degrees(phase(sum(rect(1, radians(d)) for d in deg) / len(deg)))
+
+
 def mean_time(times):
     if times:
         t = (time.split(':') for time in times)
-        seconds = ((float(s) + int(m) * 60 + int(h) * 3600) 
-                for h, m, s in t)
+        seconds = ((float(s) + int(m) * 60 + int(h) * 3600)
+                   for h, m, s in t)
         day = 24 * 60 * 60
         to_angles = [s * 360. / day for s in seconds]
         mean_as_angle = mean_angle(to_angles)
@@ -61,17 +66,19 @@ def mean_time(times):
     else:
         return 'No data'
 
+
 def get_csv(userid):
-    owner_id = int(userid) 
+    owner_id = int(userid)
     if owner_id >= 30064:
-        csv_file = "hs_g73_m08/hs_" + str(owner_id) + "_m08_0903_1356.csv"   
+        csv_file = "hs_g73_m08/hs_" + str(owner_id) + "_m08_0903_1356.csv"
     else:
         csv_file = "hs_g73_m08/hs_" + str(owner_id) + "_m08_0903_1355.csv"
     if os.path.isfile(csv_file):
-        data = pd.read_csv(csv_file, encoding='cp949' ,index_col=0)
+        data = pd.read_csv(csv_file, encoding='cp949', index_col=0)
         return data
     else:
         return 'No User'
+
 
 def time_val_of_state(userid, State):
     data = get_csv(userid)
@@ -83,6 +90,7 @@ def time_val_of_state(userid, State):
         time_list.append(time_d)
     return time_list
 
+
 def time_angle_list(userid, State):
     time_ang_list = []
     time_list = time_val_of_state(userid, State)
@@ -91,12 +99,14 @@ def time_angle_list(userid, State):
         time_ang_list.append(time_to_angle)
     return time_ang_list
 
+
 def mean_time_of_state(userid, state):
     time_mean = mean_time(time_val_of_state(userid, state))
     if time_mean == 'No data':
         return 'No data'
     else:
         return time_mean
+
 
 def std_time_of_state(userid, state):
     mtos = mean_time_of_state(userid, state)
@@ -108,6 +118,7 @@ def std_time_of_state(userid, state):
         time_std = angle_to_hms(time_std_ang)
         return time_std
 
+
 def date_val_of_state(userid, State):
     data = get_csv(userid)
     time_data = data.loc[data['State'] == State, 'Time']
@@ -117,6 +128,7 @@ def date_val_of_state(userid, State):
         date_val = data.loc[data['State'] == State, 'Time'].str[9:11].values[i]
         date_list.append(date_val)
     return date_list
+
 
 def average_num_use(userid, State):
     c = Counter(date_val_of_state(userid, State))
