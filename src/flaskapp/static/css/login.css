@@ -1,11 +1,6 @@
 @charset "utf-8";
 
 .container {
-  display: grid;
-  grid-template-rows: 1fr 100px;
-  grid-template-rows: 1fr 3fr;
-  grid-gap: 10px;
-
   position: absolute;
   top: 50%;
   left: 50%;
@@ -13,27 +8,6 @@
 }
 
 /*ID 입력창*/
-.container label {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 2;
-}
-
-.form-control {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 2;
-  grid-row-end: 3;
-}
-
-#btn-submit {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: 3;
-}
-
 input[type="text"] {
   box-sizing: border-box;
   width: 300px;
