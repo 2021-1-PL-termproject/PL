@@ -312,7 +312,7 @@ border-radius: 0;
 .circle-container div {
   display: block;
   position: absolute;
-  white-space:nowrap;
+  white-space: nowrap;
 }
 .center {
   transform: translate(-100px, -120px);
