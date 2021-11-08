@@ -68,6 +68,7 @@ def user(usr):
                 for i in range(3, len_programs):
                     day_others += sorted_program_days[3][1]
                 day_others = round(day_others / (len_programs - 3), 2)
+        more_than_3_pref = True if len(program_preference) >= 3 else False
 
         avg_part = avg_participation(user_data)
         std_part = std_participation(user_data)
@@ -128,7 +129,7 @@ def user(usr):
                             avg_res=avg_res, avg_len=avg_len, avg_prob=avg_prob,
                             prob1=prob1, prob2=prob2, prob3=prob3,
                             programs=sorted_program_days, len_programs=len_programs, program_days=program_days,
-                            day1=day1, day2=day2, day3=day3, day_others=day_others, preference=preference,
+                            day1=day1, day2=day2, day3=day3, day_others=day_others, preference=preference, more_than_3_pref=more_than_3_pref,
                             total_programs=total_programs, avg_part=avg_part,
                             suni_score=suni_score, conv_score=conv_score, program_score=program_score,
                             exer=exer, exermean=exermean, exerMent=exerMent, zValueSc=zValueSc, goout=goout,

@@ -315,7 +315,9 @@
                                 {% else %}
                                     <br> 다른 사용자보다 프로그램 참여 횟수가 많아요. 앞으로도 꾸준히 활동해주세요!
                                 {% endif %}
-                                <br>{{programs[0][0]}} 프로그램을 좋아하는 다른 분들은 {{preference[0][0]}}, {{preference[1][0]}}, {{preference[2][0]}} 프로그램도 좋아하셨어요. {{name}}님도 한 번 해보시는 건 어떠세요?
+                                {% if more_than_3_pref %}
+                                    <br>{{programs[0][0]}} 프로그램을 좋아하는 다른 분들은 {{preference[0][0]}}, {{preference[1][0]}}, {{preference[2][0]}} 프로그램도 좋아하셨어요. {{name}}님도 한 번 해보시는 건 어떠세요?
+                                {% endif %}
                             {% endif %}
                         </p>
                     </div>
