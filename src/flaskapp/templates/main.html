@@ -222,16 +222,16 @@
                             {% else %}
                                 <br> 순이와 이야기를 {{num_res}}번 주고받았어요.
                                 <br> {{len_res}} 단어로 순이에게 대답하셨어요.
-                                <br> 순이의 말에 평균 {{prob_res2}}% 응답해주셨어요.
+                                <br> 순이의 말에 평균 {{avg_prob_res}}% 응답해주셨어요.
                                 {% if more_than_3_res_type == True %}
                                     <div class = "bar-graph">
                                         <div class="bar-graph-title">
                                             상황별 응답률
                                         </div>
                                         <div class="bar-graph-label">
-                                            <p>{{prob_res[0][0]}}</p>
-                                            <p>{{prob_res[1][0]}}</p>
-                                            <p>{{prob_res[2][0]}}</p>
+                                            <p>{{sorted_prob_res[0][0]}}</p>
+                                            <p>{{sorted_prob_res[1][0]}}</p>
+                                            <p>{{sorted_prob_res[2][0]}}</p>
                                         </div>
                                         <div class = "bar-graph-bar">
                                             <canvas id="response-prob" width="400" height="150">
@@ -243,16 +243,16 @@
                                             </canvas>
                                         </div>
                                     </div>
-                                    <br>{{name}}님은 {{prob_res[0][0]}} 활동을 할 때 가장 많이 순이에게 대답해주셨어요.
-                                    {% if prob_res[1][0] == "전체" %}
-                                        <br> {{prob_res[2][0]}} 활동을 할 때 두 번째로 많이 순이에게 대답해주셨어요.
-                                        <br> {{prob_res[3][0]}} 활동을 할 때 세 번째로 많이 순이에게 대답해주셨어요.
-                                    {% elif prob_res[2][0] == "전체" %}
-                                        <br> {{prob_res[1][0]}} 활동을 할 때 두 번째로 많이 순이에게 대답해주셨어요.
-                                        <br> {{prob_res[3][0]}} 활동을 할 때 세 번째로 많이 순이에게 대답해주셨어요.
+                                    <br>{{name}}님은 {{sorted_prob_res[0][0]}} 활동을 할 때 가장 많이 순이에게 대답해주셨어요.
+                                    {% if sorted_prob_res[1][0] == "전체" %}
+                                        <br> {{sorted_prob_res[2][0]}} 활동을 할 때 두 번째로 많이 순이에게 대답해주셨어요.
+                                        <br> {{sorted_prob_res[3][0]}} 활동을 할 때 세 번째로 많이 순이에게 대답해주셨어요.
+                                    {% elif sorted_prob_res[2][0] == "전체" %}
+                                        <br> {{sorted_prob_res[1][0]}} 활동을 할 때 두 번째로 많이 순이에게 대답해주셨어요.
+                                        <br> {{sorted_prob_res[3][0]}} 활동을 할 때 세 번째로 많이 순이에게 대답해주셨어요.
                                     {% else %}
-                                        <br> {{prob_res[1][0]}} 활동을 할 때 두 번째로 많이 순이에게 대답해주셨어요.
-                                        <br> {{prob_res[2][0]}} 활동을 할 때 세 번째로 많이 순이에게 대답해주셨어요.
+                                        <br> {{sorted_prob_res[1][0]}} 활동을 할 때 두 번째로 많이 순이에게 대답해주셨어요.
+                                        <br> {{sorted_prob_res[2][0]}} 활동을 할 때 세 번째로 많이 순이에게 대답해주셨어요.
                                     {% endif %}
                                 {% endif %}
                             {% endif %}
@@ -310,7 +310,7 @@
                             {% if len_programs == 0 %}
                                 <br> 순이와 함께 프로그램에 참여해보시는 건 어떠세요? 순이가 기다리고 있어요!
                             {% else %}
-                                {% if (total_programs - avg_programs) < 0 %}
+                                {% if (total_programs - avg_part) < 0 %}
                                     <br> 다른 사용자보다 프로그램 참여 횟수가 적어요. 여러 프로그램에 참여해보며 취미 활동을 늘려보시는 건 어떠세요?
                                 {% else %}
                                     <br> 다른 사용자보다 프로그램 참여 횟수가 많아요. 앞으로도 꾸준히 활동해주세요!
@@ -400,9 +400,83 @@
                                     </div>
                                 </div>
                             </div>
-                            생활패턴 {{lifepattern_point}}점
+                            <div class="lifepattern-score">
+                                <p class="score-name">생활패턴 점수</p>
+                                <hr />
+                                <p class="score-val"><span id="score">{{lifepattern_point}}</span>점</p>
+                            </div>
                         </div>
-                      <div class="grid-suni1">5</div>
+                        <div class="grid-suni1">
+                            <div class="suni-total-score">
+                                <p class="score-title">순이 소통 점수</p>
+                                <p class="score-value">{{suni_score}}<span id="unit01">점</span></p>
+                            </div>
+                            <div class="blank01">.</div>
+                            <div class="suni-total-comment">
+                                <p>
+                                    {% if program_score >= 90 %}
+                                        {{name}}님과 순이는 단짝 친구! 앞으로도 지금처럼 순이를 찾아주세요.
+                                    {% elif suni_score >= 50 %}
+                                        {{name}}님은 순이와 자주 대화하고 있어요. 지금보다 조금 더 순이를 찾아주시는 건 어떠세요?
+                                    {% else %}
+                                        {{name}}은 순이와 대화를 자주 하지 않으셨어요. 순이가 {{name}}의 이야기를 기다리고 있어요.
+                                    {% endif %}
+                                    {% if program_score >= 80 %}
+                                        <br> {{name}}님은 프로그램 참여왕! 앞으로도 지금처럼 활동해주세요.
+                                    {% elif program_score >= 50 %}
+                                        <br> {{name}}님은 프로그램에 보통 정도로 참여하셨어요. 지금보다 더 많은 프로그랭에 참여해도 좋을 것 같아요!
+                                    {% else %}
+                                        <br> {{name}}은 프로그램에 많이 참여하지 않으셨어요. 순이와 함께 프로그램에 참여해보아요.
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="blank02">.</div>
+                            <div class="suni-conv-score">
+                                <p class="score-title">대화</p>
+                                <p class="score-value">{{conv_score}}점</p>
+                            </div>
+                            <div class="blank03">.</div>
+                            <div id="conv-details-1">
+                                <p class="details-title1">대화 횟수</p>
+                                <p class="details-value1">{{num_res}}회</p>
+                            </div>
+                            <div id="conv-details-2">
+                                <p class="details-title2">응답률</p>
+                                <p class="details-value2">{{avg_prob_res}}%</p>
+                            </div>
+                            <div class="blank04">.</div>
+                            <div class="suni-program-score">
+                                <p class="score-title">프로그램</p>
+                                <p class="score-value">{{program_score}}점</p>
+                            </div>
+                            <div class="blank05">.</div>
+                            <div id="program-details-1">
+                                <p class="details-title1">참여 횟수</p>
+                                <p class="details-value1">{{total_programs}}회</p>
+                            </div>
+                            <div id="program-details-2">
+                                <p class="details-title2">종류</p>
+                                <p class="details-value2">{{len_programs}}가지</p>
+                            </div>
+                            <div class="blank06">.</div>
+                            <div class="blank07">.</div>
+                            <div id="program-details2-1">
+                                <p class="details2-title1">{{programs[0][0]}}</p>
+                                <p class="details2-value1">{{day1}}회</p>
+                            </div>
+                            <div id="program-details2-2">
+                                <p class="details2-title2">{{programs[1][0]}}</p>
+                                <p class="details2-value2">{{day2}}회</p>
+                            </div>
+                            <div id="program-details2-3">
+                                <p class="details2-title3">{{programs[2][0]}}</p>
+                                <p class="details2-value3">{{day3}}회</p>
+                            </div>
+                            <div id="program-details2-4">
+                                <p class="details2-title4">기타</p>
+                                <p class="details2-value4">{{day_others}}회</p>
+                            </div>
+                        </div>
                     </div>
                     </div>
                     <div class="modal-footer">

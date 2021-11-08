@@ -80,6 +80,18 @@ def avg_response(user_data):
         total_response += num_response(user_data[user])
     return round((total_response / len(user_data.keys())), 2)
 
+def std_response(user_data):
+    """
+    This function calculates standard deviation of user responses of whole users.
+    :param user_data: dictionary that contains user data (key = user id)
+    :return: (float) the standard deviation of responses of whole users
+    """
+    var = 0
+    avg = avg_response(user_data)
+    for user in user_data:
+        var += (num_response(user_data[user]) - avg)**2
+    var /= len(user_data.keys())
+    return round(var**(1/2), 2)
 
 # 응답 길이
 def len_response(data):
@@ -287,6 +299,44 @@ def participated_times(data):
                 program[data["State"][i]] = 1
     return program
 
+def total_participation(data):
+    """
+    This function returns total program participation of the user
+    :param data: (pandas dataframe) dataframe to analyze
+    :return: (int) total number of program participation
+    """
+    num_participation = 0;
+    for i in range(len(data)):
+        if data["Z"][i] == "프로그램":
+            num_participation += 1;
+    return num_participation
+
+
+def avg_participation(user_data):
+    """
+    This function returns average total program participation of whole user.
+    :param user_data: dictionary that contains user data (key = user id)
+    :return: (float) average number of total participation
+    """
+    total = 0
+    for user in user_data:
+        total += total_participation(user_data[user])
+    return round(total / len(user_data.keys()), 2)
+
+
+def std_participation(user_data):
+    """
+    This function returns standard deviation of total program participation of whold user.
+    :param user_data: dictionary that contains user data (key = user id)
+    :return: (float) standard deviation of total participation
+    """
+    var = 0
+    avg = avg_participation(user_data)
+    for user in user_data:
+        var += (total_participation(user_data[user]) - avg) ** 2
+    var /= len(user_data.keys())
+    return round(var ** (1/2), 2)
+
 
 def participated_days(data):
     """
@@ -312,20 +362,6 @@ def participated_days(data):
     sorted_program = sorted(
         program.items(), key=operator.itemgetter(1), reverse=True)
     return program, sorted_program
-
-
-def avg_participated_times(user_data):
-    """
-    This function calculates average program participation times of whole users.
-    :param user_data: dictionary that contains user data (key = user id)
-    :return: (float) average participation times
-    """
-    total = 0
-    for user in user_data:
-        program_times = participated_times(user_data[user])
-        for program in program_times:
-            total += program_times[program]
-    return round((total / len(user_data.keys())), 2)
 
 
 def program_preference(user_data, program):
@@ -389,3 +425,22 @@ def extract_user_name(data):
         return "Unknown"    # Default name
     else:
         return msg.split("님")[0].split().pop()
+
+def zvalue(x, mean, std):
+    """
+    This function calculates z-value of x
+    :param x: target
+    :param mean: mean of the data set
+    :param std: standard deviation of the data set
+    :return: (float) z-value of x
+    """
+    return round(((x - mean) / std), 2)
+
+
+def score(z_score):
+    """
+    This function convert z-value to health score
+    :param z_score: z-value of target
+    :return: (int) health score of given z-value (maximum = 100)
+    """
+    return round(min(40 * z_score + 50, 100))

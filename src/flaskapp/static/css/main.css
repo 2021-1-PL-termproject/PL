@@ -2,7 +2,6 @@
 
 html {
   height: 100vh;
-  
 }
 
 .container {
@@ -165,14 +164,14 @@ input[id*="open"] + label {
   grid-template-rows: 20px 1fr;
   grid-gap: 10px;
 }
-.suni .bar-graph .bar-graph-title{
+.suni .bar-graph .bar-graph-title {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
   text-align: center;
 }
-.suni .bar-graph .bar-graph-label{
+.suni .bar-graph .bar-graph-label {
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 2;
@@ -183,7 +182,7 @@ input[id*="open"] + label {
   line-height: 40px;
   font-size: 13px;
 }
-.suni .bar-graph .bar-graph-bar{
+.suni .bar-graph .bar-graph-bar {
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 2;
@@ -204,19 +203,19 @@ canvas#participation-days {
   align-items: center;
 }
 
-#chart_div{
+#chart_div {
   position: relative;
   margin-left: 10px;
 }
 
-.testing{
+.testing {
   position: relative;
 }
-.activity{
+.activity {
   position: relative;
   margin-left: 10px;
 }
-.grid_A{
+.grid_A {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -228,19 +227,18 @@ canvas#participation-days {
 }
 
 .grid_A > div {
-background-color: rgba(255, 255, 255, 0.8);
-margin-top: 1px;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-top: 1px;
 }
 
-.zchart{
+.zchart {
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 2;
   padding: 20px 0;
-
 }
-.zment{
+.zment {
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 1;
@@ -251,8 +249,7 @@ margin-top: 1px;
   align-self: center;
 }
 
-
-.exerchart{
+.exerchart {
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 2;
@@ -260,14 +257,14 @@ margin-top: 1px;
   text-align: center;
   padding: 20px 0;
 }
-.exerment{
+.exerment {
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 3;
   padding: 20px 0;
 }
-.outchart{
+.outchart {
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 3;
@@ -275,7 +272,7 @@ margin-top: 1px;
   padding: 20px 0;
 }
 
-.outment{
+.outment {
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 3;
@@ -283,23 +280,22 @@ margin-top: 1px;
   padding: 20px 0;
 }
 
-.modal-dialog{
-  margin-left: 25%;
+.modal-dialog {
+  margin-left: 22.5%;
   padding: 0;
-
 }
 
-.modal-content{
-height: auto;
-width: 800px;
-min-height: 100%;
-border-radius: 0;
+.modal-content {
+  height: auto;
+  width: 800px;
+  min-height: 800px;
+  border-radius: 0;
 }
 
-.modal_container{
+.modal_container {
   grid-template-columns: 200px 100px;
   grid-template-rows: auto;
-} 
+}
 
 .lifepattern1 {
   height: 1000px;
@@ -317,6 +313,403 @@ border-radius: 0;
 .center {
   transform: translate(-100px, -120px);
 }
-.dinnerreport{
+.dinnerreport {
   text-align: right;
+}
+.lifepattern-score {
+  width: 110px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-left: 10px;
+  transform: translate(0, -50px);
+}
+hr {
+  border: 1px solid black;
+}
+.score-name {
+  text-align: center;
+  vertical-align: middle;
+  height: 10px;
+}
+#score {
+  font-size: xx-large;
+  font-weight: bold;
+}
+.score-val {
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  height: 40px;
+}
+/*순이 대화*/
+.grid-suni1 {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(3, 30px) 5px repeat(4, 100px);
+  grid-template-rows: 30px 60px 5px 30px 40px 5px 30px 40px 5px 30px 40px;
+
+  margin: 0px;
+  padding: 10px;
+  text-align: center;
+}
+.suni-total-score {
+  /*총 점수*/
+  margin: 0px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.suni-total-score .score-title {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+
+  margin: 0px;
+  border-bottom: 1px solid black;
+}
+
+#unit01{
+  font-size: 16px;
+}
+
+.suni-total-score .score-value {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  margin: 0px;
+  align-self: flex-end;
+  font-size: 30px;
+  font-weight: bold;
+}
+.grid-suni1 .blank01 {
+  grid-column-start: 4;
+  grid-column-end: 9;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  text-align: center;
+  color: rgba(0, 0, 0, 0);
+}
+.suni-total-comment {
+  /*조언*/
+  grid-column-start: 5;
+  grid-column-end: 9;
+  grid-row-start: 1;
+  grid-row-end: 3;
+
+  margin: 0px;
+  border: 1px solid black;
+  text-align: justify;
+}
+.grid-suni1 .blank02 {
+  grid-column-start: 1;
+  grid-column-end: 9;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  text-align: center;
+  color: rgba(0, 0, 0, 0);
+}
+.suni-conv-score {
+  /*대화점수*/
+  margin: 0px;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 6;
+}
+.suni-conv-score .score-title {
+  border-bottom: 1px solid black;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+.suni-conv-score .score-value {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 6;
+  align-self: center;
+}
+.grid-suni1 .blank03 {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 4;
+  grid-row-end: 6;
+  text-align: center;
+  color: rgba(0, 0, 0, 0);
+}
+#conv-details-1 {
+  /*대화횟수*/
+  margin: 0px;
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 4;
+  grid-row-end: 6;
+}
+[class^="details-title"] {  
+  font-size: 12px;
+}
+#conv-details-1 .details-title1 {
+  display: block;
+  margin: 0px;
+  border-bottom: 1px solid black;
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 4;
+  grid-row-end: 5;
+
+  margin: 0px;
+}
+#conv-details-1 .details-value1 {
+  display: block;
+  margin: 0px;
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 5;
+  grid-row-end: 6;
+  align-self: center;
+}
+#conv-details-2 {
+  /*응답률*/
+  margin: 0px;
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 4;
+  grid-row-end: 6;
+}
+#conv-details-2 .details-title2 {
+  display: block;
+  margin: 0px;
+  border-bottom: 1px solid black;
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+#conv-details-2 .details-value2 {
+  display: block;
+  margin: 0px;
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 5;
+  grid-row-end: 6;
+  align-self: center;
+}
+.grid-suni1 .blank04 {
+  grid-column-start: 1;
+  grid-column-end: 9;
+  grid-row-start: 6;
+  grid-row-end: 7;
+  text-align: center;
+  color: rgba(0, 0, 0, 0);
+}
+.suni-program-score {
+  /*참여 점수*/
+  margin: 0px;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 7;
+  grid-row-end: 9;
+}
+.suni-program-score .score-title {
+  display: block;
+  margin: 0px;
+  border-bottom: 1px solid black;
+
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 7;
+  grid-row-end: 8;
+}
+.suni-program-score .score-value {
+  margin: 0px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 8;
+  grid-row-end: 9;
+  align-self: center;
+}
+.grid-suni1 .blank05 {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 7;
+  grid-row-end: 9;
+  text-align: center;
+  color: rgba(0, 0, 0, 0);
+}
+#program-details-1 {
+  /*참여 횟수*/
+  margin: 0px;
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 7;
+  grid-row-end: 9;
+}
+#program-details-1 .details-title1 {
+  margin: 0px;
+  border-bottom: 1px solid black;
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 7;
+  grid-row-end: 8;
+}
+#program-details-1 .details-value1 {
+  margin: 0px;
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 8;
+  grid-row-end: 9;
+  display: block;
+  align-self: center;
+}
+#program-details-2 {
+  /*종류*/
+  margin: 0px;
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 7;
+  grid-row-end: 9;
+}
+#program-details-2 .details-title2 {
+  margin: 0px;
+  border-bottom: 1px solid black;
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 7;
+  grid-row-end: 8;
+}
+#program-details-2 .details-value2 {
+  margin: 0px;
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 8;
+  grid-row-end: 9;
+  display: block;
+  align-self: center;
+}
+.grid-suni1 .blank06 {
+  grid-column-start: 1;
+  grid-column-end: 9;
+  grid-row-start: 9;
+  grid-row-end: 10;
+  text-align: center;
+  color: rgba(0, 0, 0, 0);
+}
+.grid-suni1 .blank07 {
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 10;
+  grid-row-end: 12;
+  text-align: center;
+  color: rgba(0, 0, 0, 0);
+}
+#program-details2-1 {
+  margin: 0px;
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 10;
+  grid-row-end: 12;
+}
+[class^="details2-title"] {  
+  font-size: 12px;
+}
+#program-details2-1 .details2-title1 {
+  margin: 0px;
+  border-bottom: 1px solid black;
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 10;
+  grid-row-end: 11;
+}
+#program-details2-1 .details2-value1 {
+  margin: 0px;
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 11;
+  grid-row-end: 12;
+  display: block;
+  align-self: center;
+}
+#program-details2-2 {
+  margin: 0px;
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 10;
+  grid-row-end: 12;
+}
+#program-details2-2 .details2-title2 {
+  margin: 0px;
+  border-bottom: 1px solid black;
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 10;
+  grid-row-end: 11;
+}
+#program-details2-2 .details2-value2 {
+  margin: 0px;
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 11;
+  grid-row-end: 12;
+  display: block;
+  align-self: center;
+}
+#program-details2-3 {
+  margin: 0px;
+  grid-column-start: 7;
+  grid-column-end: 8;
+  grid-row-start: 10;
+  grid-row-end: 12;
+}
+#program-details2-3 .details2-title3{
+  margin: 0px;
+  border-bottom: 1px solid black;
+  grid-column-start: 7;
+  grid-column-end: 8;
+  grid-row-start: 10;
+  grid-row-end: 11;
+}
+#program-details2-3 .details2-value3{
+  margin: 0px;
+  grid-column-start: 7;
+  grid-column-end: 8;
+  grid-row-start: 11;
+  grid-row-end: 12;
+  display: block;
+  align-self: center;
+}
+#program-details2-4 {
+  margin: 0px;
+  grid-column-start: 8;
+  grid-column-end: 9;
+  grid-row-start: 10;
+  grid-row-end: 12;
+}
+#program-details2-4 .details2-title4{
+  margin: 0px;
+  border-bottom: 1px solid black;
+  grid-column-start: 8;
+  grid-column-end: 9;
+  grid-row-start: 10;
+  grid-row-end: 11;
+}
+#program-details2-4 .details2-value4{
+  margin: 0px;
+  grid-column-start: 8;
+  grid-column-end: 9;
+  grid-row-start: 11;
+  grid-row-end: 12;
+  display: block;
+  align-self: center;
 }
