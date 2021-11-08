@@ -97,6 +97,25 @@ def user(usr):
         ats = std_time_of_state(usr, '기상하기')
         avs = angle_to_hms(angle_dif(atm, stm))
 
+        sleep_point = 5
+        awake_point = 5
+        breakfast_point = 5
+        lunch_point = 5
+        dinner_point = 5
+        if int(sts.split(':')[0]) < 3:
+            sleep_point += (3 - int(sts.split(':')[0])) * 5
+        if int(ats.split(':')[0]) < 3:
+            awake_point += (3 - int(ats.split(':')[0])) * 5
+        if int(bs.split(':')[0]) < 3:
+            breakfast_point += (3 - int(bs.split(':')[0])) * 5
+        if int(ls.split(':')[0]) < 3:
+            lunch_point += (3 - int(ls.split(':')[0])) * 5
+        if int(ds.split(':')[0]) < 3:
+            dinner_point += (3 - int(ds.split(':')[0])) * 5          
+        lifepattern_point = int(sleep_point) + int(awake_point) + int(breakfast_point) + int(lunch_point) + int(dinner_point)
+        if int(avs.split(':')[0]) != 7 and int(avs.split(':')[0]) != 8:
+            lifepattern_point = lifepattern_point - 10
+        
         return render_template('main.html', usr=usr, name=name,
                             num_res=num_res, len_res=len_res,
                             prob_res=sorted_prob_res, prob_res2=avg_prob_res, more_than_3_res_type=more_than_3_res_type,
@@ -108,6 +127,6 @@ def user(usr):
                             exer=exer, exermean=exermean, exerMent=exerMent, zValueSc=zValueSc, goout=goout,
                             gooutMean=gooutMean, zgraph =zgraph,
                             toilet=toilet, hobby=hobby, bm=bm, lm=lm, dm=dm, bs=bs, ls=ls, ds=ds,
-                            rmm=rmm, rms=rms, stm=stm, sts=sts, atm=atm, ats=ats, avs=avs)
+                            rmm=rmm, rms=rms, stm=stm, sts=sts, atm=atm, ats=ats, avs=avs, lifepattern_point=lifepattern_point)
     except:
         return 'No data'

@@ -125,9 +125,9 @@
                                 {% endif %}
                             </div>
                             <div class="sleepadvice">
-                                {% if avs[0] == '0' or avs[0] == '1' or avs[0] == '2' or avs[0] == '3' or avs[0] == '4' or avs[0] == '5' or avs[0] == '6' %}
+                                {% if avs.split(':')[0] == '0' or avs.split(':')[0] == '1' or avs.split(':')[0] == '2' or avs.split(':')[0] == '3' or avs.split(':')[0] == '4' or avs.split(':')[0] == '5' or avs.split(':')[0] == '6' %}
                                     <b>수면시간이 너무 적어요!</b> 권장 수면시간은 7~8시간이에요!<br>
-                                {% elif avs[0] == '7' or avs[0] == '8' %}
+                                {% elif avs.split(':')[0] == '7' or avs.split(':')[0] == '8' %}
                                     {{name}}님! 적절한 수면시간을 가지고 계세요!<br>
                                 {% else %}
                                     <b>수면시간이 너무 길어요!</b> 권장 수면시간은 7~8시간이에요!<br>
@@ -135,9 +135,9 @@
                                 <!-- 취침/기상시간 표준편차가 2시간 이상일 때 조언 -->
                                 {% if sts == 'No data' %}
                                 {% elif ats == 'No data' %}
-                                {% elif sts[0] != '0' and sts[0] != '1' %}
+                                {% elif sts.split(':')[0] != '0' and sts.split(':')[0] != '1' %}
                                     {{ name }}님! 취침시간을 규칙적으로 하는 것이 좋을거 같아요!
-                                {% elif ats[0] != '0' and ats[0] != '1' %}
+                                {% elif ats.split(':')[0] != '0' and ats.split(':')[0] != '1' %}
                                     {{ name }}님! 취침시간을 규칙적으로 하는 것이 좋을거 같아요!
                                 {% endif %}
                             </div>
@@ -169,20 +169,20 @@
                                 <div class="mealadvice">
                                     <!-- 식사시간 표준편차가 1시간 이상일 때 조언 -->
                                     {% if bs == 'No data' %}
-                                    {% elif bs[0] != '0' %}
+                                    {% elif bs.split(':')[0] != '0' %}
                                         아침을 규칙적으로 드시는 것이 좋을거 같아요!<br>
                                     {% endif %}
                                     {% if ls == 'No data' %}
-                                    {% elif ls[0] != '0' %}
+                                    {% elif ls.split(':')[0] != '0' %}
                                         점심을 규칙적으로 드시는 것이 좋을거 같아요!<br>
                                     {% endif %}
                                     {% if ds == 'No data' %}
-                                    {% elif ds[0] != '0' %}
+                                    {% elif ds.split(':')[0] != '0' %}
                                         저녁을 규칙적으로 드시는 것이 좋을거 같아요!<br>
                                     {% endif %}
                                     <!-- 일반 약 복용 표준편차가 1시간 이상일 때 조언 -->
                                     {% if rms == 'No data' %}
-                                    {% elif rms[0] != '0' %}
+                                    {% elif rms.split(':')[0] != '0' %}
                                         약을 규칙적으로 복용하는 것이 좋을거 같아요!
                                     {% endif %}
                                 </div>
@@ -332,12 +332,76 @@
                     </div>
                     <div class="modal-body">
                     <div class="modal_container">
-                      <div class="grid-total">1</div>
-                      <div class="grid-profile1">2</div>
-                      <div class="grid-activity1">3</div>
-                      <div class="grid-lifepattern1">
-                        4
-                      </div>
+                        <div class="grid-total">1</div>
+                        <div class="grid-profile1">2</div>
+                        <div class="grid-activity1">3</div>
+                        <div class="grid-lifepattern1">
+                            <div class="circle-container">
+                                <div class='center'>
+                                    <canvas id="canvasreport" width="300" height="300">
+                                        <script type="text/javascript">
+                                            var sleep_hr = {{ stm.split(':')[0] }}
+                                            var sleep_min = {{ stm.split(':')[1] }}
+                                            var sleep_sec = {{ stm.split(':')[2] }}
+
+                                            var awake_hr = {{ atm.split(':')[0] }}
+                                            var awake_min = {{ atm.split(':')[1] }}
+                                            var awake_sec = {{ atm.split(':')[2] }}
+
+                                            var breakfast_hr = {{ bm.split(':')[0] }}
+                                            var breakfast_min = {{ bm.split(':')[1] }}
+                                            var breakfast_sec = {{ bm.split(':')[2] }}
+
+                                            var lunch_hr = {{ lm.split(':')[0] }}
+                                            var lunch_min = {{ lm.split(':')[1] }}
+                                            var lunch_sec = {{ lm.split(':')[2] }}
+
+                                            var dinner_hr = {{ dm.split(':')[0] }}
+                                            var dinner_min = {{ dm.split(':')[1] }}
+                                            var dinner_sec = {{ dm.split(':')[2] }}
+                                        </script>
+                                    </canvas>
+                                </div>
+                                <div class='deg315' style="transform: rotate(315deg) translate(13em) rotate(-315deg)">
+                                    <div class="sleepreport">
+                                        {{name}}님은 보통<br>
+                                        {{stm.split(':')[0]}}시 {{stm.split(':')[1]}}분 {{stm.split(':')[2]}}초부터 {{atm.split(':')[0]}}시 {{atm.split(':')[1]}}분 {{atm.split(':')[2]}}초까지<br>
+                                        {{avs.split(':')[0]}}시간 {{avs.split(':')[1]}}분 {{avs.split(':')[2]}}초 동안 주무세요.
+                                    </div>
+                                </div>
+                                <div class='deg30' style="transform: rotate(30deg) translate(13em) rotate(-30deg)">
+                                    <div class="breakfastreport">
+                                        {% if bm == 'No data' %}
+                                            {{name}}님은 아침을 드신 기록이 없어요.<br>
+                                        {% else %}
+                                            {{name}}님은 아침을<br>
+                                            {{bm.split(':')[0]}}시 {{bm.split(':')[1]}}분 {{bm.split(':')[2]}}초에 드세요.<br>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class='deg105' style="transform: rotate(105deg) translate(11em) rotate(-105deg)">
+                                    <div class="lunchreport">
+                                        {% if lm == 'No data' %}
+                                            {{name}}님은 점심을 드신 기록이 없어요.<br>
+                                        {% else %}
+                                            {{name}}님은 점심을<br>
+                                            {{lm.split(':')[0]}}시 {{lm.split(':')[1]}}분 {{lm.split(':')[2]}}초에 드세요.<br>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class='deg195' style="transform: rotate(195deg) translate(17em) rotate(-195deg)">
+                                    <div class="dinnerreport">
+                                        {% if dm == 'No data' %}
+                                            {{name}}님은 저녁을 드신 기록이 없어요.<br>
+                                        {% else %}
+                                            {{name}}님은 저녁을<br>
+                                            {{dm.split(':')[0]}}시 {{dm.split(':')[1]}}분 {{dm.split(':')[2]}}초에 드세요.<br>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            생활패턴 {{lifepattern_point}}점
+                        </div>
                       <div class="grid-suni1">5</div>
                     </div>
                     </div>
@@ -351,6 +415,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="static/js/clock1.js"></script>
     <script type="text/javascript" src="static/js/clock2.js"></script>
+    <script type="text/javascript" src="static/js/report_clock.js"></script>
     <script type="text/javascript" src="static/js/prob_res_graph.js"></script>
     <script type="text/javascript" src="static/js/program_participation_graph.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

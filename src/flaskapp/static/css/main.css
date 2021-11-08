@@ -284,20 +284,39 @@ margin-top: 1px;
 }
 
 .modal-dialog{
-width: 500;
-height: 500;
-margin: 0;
-padding: 0;
+  margin-left: 25%;
+  padding: 0;
 
 }
 
 .modal-content{
 height: auto;
+width: 800px;
 min-height: 100%;
 border-radius: 0;
 }
 
 .modal_container{
   grid-template-columns: 200px 100px;
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: auto;
 } 
+
+.lifepattern1 {
+  height: 1000px;
+}
+.circle-container {
+  margin-left: 25%;
+  height: 400px;
+  transform: translate(90px, 150px);
+}
+.circle-container div {
+  display: block;
+  position: absolute;
+  white-space:nowrap;
+}
+.center {
+  transform: translate(-100px, -120px);
+}
+.dinnerreport{
+  text-align: right;
+}
