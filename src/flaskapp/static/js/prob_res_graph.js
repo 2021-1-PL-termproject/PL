@@ -38,6 +38,7 @@ function drawGraph(){
 
     ctx.beginPath();
     ctx.font = '12px malgun gothic'
+    ctx.textBaseline = 'middle'
     ctx.fillStyle = "black";
     ctx.fillText(parseInt(first*100) + "%", first*width + 10, radius);
     ctx.closePath();
@@ -57,6 +58,7 @@ function drawGraph(){
 
     ctx.beginPath();
     ctx.font = '12px malgun gothic'
+    ctx.textBaseline = 'middle'
     ctx.fillStyle = "black";
     ctx.fillText(parseInt(second*100) + "%", second*width + 10, 55+radius);
     ctx.closePath();
@@ -76,6 +78,7 @@ function drawGraph(){
 
     ctx.beginPath();
     ctx.font = '12px malgun gothic'
+    ctx.textBaseline = 'middle'
     ctx.fillStyle = "black";
     ctx.fillText(parseInt(third*100) + "%", third*width + 10, 110+radius);
     ctx.closePath();

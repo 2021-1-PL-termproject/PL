@@ -48,6 +48,7 @@ function drawGraph(){
 
     ctx.beginPath();
     ctx.font = '12px malgun gothic'
+    ctx.textBaseline = 'middle'
     ctx.fillStyle = "black";
     ctx.fillText(first + "일", width1 + 10, radius);
     ctx.closePath();
@@ -67,6 +68,7 @@ function drawGraph(){
 
     ctx.beginPath();
     ctx.font = '12px malgun gothic'
+    ctx.textBaseline = 'middle'
     ctx.fillStyle = "black";
     ctx.fillText(second + "일", width2 + 10, 55+radius);
     ctx.closePath();
@@ -86,6 +88,7 @@ function drawGraph(){
 
     ctx.beginPath();
     ctx.font = '12px malgun gothic'
+    ctx.textBaseline = 'middle'
     ctx.fillStyle = "black";
     ctx.fillText(third + "일", width3 + 10, 110+radius);
     ctx.closePath();
@@ -105,6 +108,7 @@ function drawGraph(){
 
     ctx.beginPath();
     ctx.font = '12px malgun gothic'
+    ctx.textBaseline = 'middle'
     ctx.fillStyle = "black";
     ctx.fillText(others + "일", width4 + 10, 165+radius);
     ctx.closePath();
