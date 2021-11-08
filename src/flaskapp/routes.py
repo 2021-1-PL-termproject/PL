@@ -68,7 +68,7 @@ def user(usr):
                 day_others += sorted_program_days[3][1]
             day_others = round(day_others / (len_programs - 3), 2)
 
-    more_than_3_pref = True if len(program_preference) >= 3 else False
+    more_than_3_pref = True if len(preference) >= 3 else False
     avg_part = avg_participation(user_data)
     std_part = std_participation(user_data)
     program_score = score(zvalue(total_programs, avg_part, std_part))
