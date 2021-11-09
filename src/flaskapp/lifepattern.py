@@ -103,10 +103,7 @@ def time_angle_list(userid, State):
 
 def mean_time_of_state(userid, state):
     time_mean = mean_time(time_val_of_state(userid, state))
-    if time_mean == 'No data':
-        return 'No data'
-    else:
-        return time_mean
+    return time_mean
 
 
 def std_time_of_state(userid, state):
