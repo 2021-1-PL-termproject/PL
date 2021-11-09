@@ -24,7 +24,7 @@ def read_data(user_profile, path):
 def trim_data(user_data, start_date, end_date):
     """
     This function slices user data to given time period(start_date ~ end_date)
-    :param data: dictionary that contains user data (key = user id)
+    :param user_data: dictionary that contains user data (key = user id)
     :param start_date: (int) start date to cut
     :param end_date: (int) end date to cut
     :return: (pandas dataframe) trimmed data
@@ -80,6 +80,7 @@ def avg_response(user_data):
         total_response += num_response(user_data[user])
     return round((total_response / len(user_data.keys())), 2)
 
+
 def std_response(user_data):
     """
     This function calculates standard deviation of user responses of whole users.
@@ -92,6 +93,7 @@ def std_response(user_data):
         var += (num_response(user_data[user]) - avg)**2
     var /= len(user_data.keys())
     return round(var**(1/2), 2)
+
 
 # 응답 길이
 def len_response(data):
@@ -152,6 +154,10 @@ def probability_to_response_to_action(data, col="State"):
                 num_action[data[col][i]] = 1
             if data[col][i] not in response:
                 response[data[col][i]] = 0
+            if not pd.isna(data["Message_2"][i]):
+                num_action[data[col][i]] += 1
+            if not pd.isna(data["Message_3"][i]):
+                num_action[data[col][i]] += 1
 
         # count the number of user response in each action
         if not pd.isna(data["STT_1"][i]):
@@ -221,15 +227,6 @@ def probability_to_response_to_msg(data):
         if not pd.isna(data["STT_3"][i]):
             response[data["Sequence"][i]] += 1
 
-    # add total response
-    total_msgs = 0
-    total_response = 0
-    for item in num_msg:
-        total_msgs += num_msg[item]
-        total_response += response[item]
-    num_msg["전체"] = total_msgs
-    response["전체"] = total_response
-
     # calculate probability
     prob_response = {}
     for item in num_msg:
@@ -298,6 +295,7 @@ def participated_times(data):
             else:
                 program[data["State"][i]] = 1
     return program
+
 
 def total_participation(data):
     """
@@ -425,6 +423,7 @@ def extract_user_name(data):
         return "Unknown"    # Default name
     else:
         return msg.split("님")[0].split().pop()
+
 
 def zvalue(x, mean, std):
     """
