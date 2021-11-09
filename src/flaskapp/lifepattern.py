@@ -35,16 +35,6 @@ def angle_dif(a, b):
         return angle_difference
 
 
-def std_of_angles(angles, mean):
-    sum = 0
-    for i in angles:
-        dev = angle_dif(i, mean)
-        dev_sqr = dev * dev
-        sum += dev_sqr
-    std = sqrt(sum / int(len(angles)))
-    return std
-
-
 def mean_angle(deg):
     return degrees(phase(sum(rect(1, radians(d)) for d in deg) / len(deg)))
 
@@ -65,6 +55,17 @@ def mean_time(times):
         return '%02i:%02i:%02i' % (h, m, s)
     else:
         return 'No data'
+
+
+def std_of_angles(angles):
+    sum = 0
+    mean = mean_angle(angles)
+    for i in angles:
+        dev = angle_dif(i, mean)
+        dev_sqr = dev * dev
+        sum += dev_sqr
+    std = sqrt(sum / int(len(angles)))
+    return std
 
 
 def get_csv(userid):
@@ -113,8 +114,7 @@ def std_time_of_state(userid, state):
     if mtos == 'No data':
         return 'No data'
     else:
-        time_mean_ang = to_angle(mtos)
-        time_std_ang = std_of_angles(time_angle_list(userid, state), time_mean_ang)
+        time_std_ang = std_of_angles(time_angle_list(userid, state))
         time_std = angle_to_hms(time_std_ang)
         return time_std
 
