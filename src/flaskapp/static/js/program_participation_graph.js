@@ -94,22 +94,39 @@ function drawGraph(){
     ctx.closePath();
 
     // fourth bar
-    ctx.beginPath();
-    ctx.arc(radius, 165 + radius, radius, 0.5*Math.PI, 1.5*Math.PI, false);
-    ctx.moveTo(radius, 165);
-    ctx.lineTo(width4 - radius, 165);
-    ctx.arc(width4 - radius, 165 + radius, radius, 1.5*Math.PI, 0.5*Math.PI, false);
-    ctx.moveTo(width4 - radius, 165 + height);
-    ctx.lineTo(radius, 165 + height);
-    ctx.lineTo(radius, 165);
-    ctx.fillStyle = "gray";
-    ctx.fill();
-    ctx.closePath();
+    if (width4 > 0) {
+        ctx.beginPath();
+        ctx.arc(radius, 165 + radius, radius, 0.5*Math.PI, 1.5*Math.PI, false);
+        ctx.moveTo(radius, 165);
+        ctx.lineTo(width4 - radius, 165);
+        ctx.arc(width4 - radius, 165 + radius, radius, 1.5*Math.PI, 0.5*Math.PI, false);
+        ctx.moveTo(width4 - radius, 165 + height);
+        ctx.lineTo(radius, 165 + height);
+        ctx.lineTo(radius, 165);
+        ctx.fillStyle = "gray";
+        ctx.fill();
+        ctx.closePath();
 
-    ctx.beginPath();
-    ctx.font = '12px malgun gothic'
-    ctx.textBaseline = 'middle'
-    ctx.fillStyle = "black";
-    ctx.fillText(others + "일", width4 + 10, 165+radius);
-    ctx.closePath();
+        ctx.beginPath();
+        ctx.font = '12px malgun gothic'
+        ctx.textBaseline = 'middle'
+        ctx.fillStyle = "black";
+        ctx.fillText(others + "일", width4 + 10, 165+radius);
+        ctx.closePath();
+    }
+    else {
+        ctx.beginPath();
+        ctx.fillStyle = "gray";
+        ctx.fillRect(0, 165, 5, 165 + height);
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.font = '12px malgun gothic'
+        ctx.textBaseline = 'middle'
+        ctx.fillStyle = "black";
+        ctx.fillText(others + "일", 15, 165+radius);
+        ctx.closePath();
+    }    
+
+    
 }
