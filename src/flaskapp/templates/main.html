@@ -223,6 +223,11 @@
                                 <br> 순이와 이야기를 {{num_res}}번 주고받았어요.
                                 <br> {{len_res}} 단어로 순이에게 대답하셨어요.
                                 <br> 순이의 말에 평균 {{avg_prob_res}}% 응답해주셨어요.
+                                <script type="text/javascript">
+                                    var prob1  = {{prob1}}
+                                    var prob2  = {{prob2}}
+                                    var prob3  = {{prob3}}
+                                </script>
                                 {% if more_than_3_res_type == True %}
                                     <div class = "bar-graph">
                                         <div class="bar-graph-title">
@@ -234,13 +239,7 @@
                                             <p>{{sorted_prob_res[2][0]}}</p>
                                         </div>
                                         <div class = "bar-graph-bar">
-                                            <canvas id="response-prob" width="400" height="150">
-                                                <script type="text/javascript">
-                                                    var prob1  = {{prob1}}
-                                                    var prob2  = {{prob2}}
-                                                    var prob3  = {{prob3}}
-                                                </script>
-                                            </canvas>
+                                            <canvas id="response-prob" width="400" height="150"></canvas>
                                         </div>
                                     </div>
                                     <br>{{name}}님은 {{sorted_prob_res[0][0]}} 활동을 할 때 가장 많이 순이에게 대답해주셨어요.
@@ -274,6 +273,12 @@
                     <div class = "para" id = "program-participation">
                         <p class = "analysis">
                             <span>{{name}}님은…</span>
+                            <script type="text/javascript">
+                                var day1 = {{day1}}
+                                var day2 = {{day2}}
+                                var day3 = {{day3}}
+                                var day_others = {{day_others}}
+                            </script>
                             {% if len_programs == 0 %}
                                 <br> 아직 아무 프로그램에도 참여하지 않으셨어요.
                             {% else %}
@@ -288,14 +293,7 @@
                                         <p>기타</p>
                                     </div>
                                     <div class = "bar-graph-bar">
-                                        <canvas id="participation-days" width="400" height="205">
-                                            <script type="text/javascript">
-                                                var day1 = {{day1}}
-                                                var day2 = {{day2}}
-                                                var day3 = {{day3}}
-                                                var day_others = {{day_others}}
-                                            </script>
-                                        </canvas>
+                                        <canvas id="participation-days" width="400" height="205"></canvas>
                                     </div>
                                 </div>
                                 <br> {{programs[0][0]}} 프로그램에 가장 많이 참여하셨어요. {{program_days[programs[0][0]]}}일동안 {{programs[0][1]}}번 참여하셨네요!
@@ -447,14 +445,14 @@
                                     {% elif suni_score >= 50 %}
                                         {{name}}님은 순이와 자주 대화하고 있어요. 지금보다 조금 더 순이를 찾아주시는 건 어떠세요?
                                     {% else %}
-                                        {{name}}은 순이와 대화를 자주 하지 않으셨어요. 순이가 {{name}}의 이야기를 기다리고 있어요.
+                                        {{name}}님은 순이와 대화를 자주 하지 않으셨어요. 순이가 {{name}}의 이야기를 기다리고 있어요.
                                     {% endif %}
                                     {% if program_score >= 80 %}
                                         <br> {{name}}님은 프로그램 참여왕! 앞으로도 지금처럼 활동해주세요.
                                     {% elif program_score >= 50 %}
                                         <br> {{name}}님은 프로그램에 보통 정도로 참여하셨어요. 지금보다 더 많은 프로그랭에 참여해도 좋을 것 같아요!
                                     {% else %}
-                                        <br> {{name}}은 프로그램에 많이 참여하지 않으셨어요. 순이와 함께 프로그램에 참여해보아요.
+                                        <br> {{name}}님은 프로그램에 많이 참여하지 않으셨어요. 순이와 함께 프로그램에 참여해보아요.
                                     {% endif %}
                                 </p>
                             </div>

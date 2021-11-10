@@ -24,8 +24,12 @@ def user(usr):
     num_res = num_response(user_data[int(usr)])  # 응답 횟수
     len_res = len_response(user_data[int(usr)])  # 평균 응답 길이
 
-    prob_res, sorted_prob_res = probability_to_response_to_action(user_data[int(usr)])  # 응답률
-    avg_prob_res = int(prob_res["전체"] * 100)  # 평균 응답률(유저)
+    prob_res, sorted_prob_res = probability_to_response_to_action(
+        user_data[int(usr)])  # 응답률
+    if "전체" in prob_res:
+        avg_prob_res = int(prob_res["전체"] * 100)  # 평균 응답률(유저)
+    else:
+        avg_prob_res = 0
 
     more_than_3_res_type = True if (len(prob_res) >= 3) else False
 
@@ -67,6 +71,12 @@ def user(usr):
             for i in range(3, len_programs):
                 day_others += sorted_program_days[3][1]
             day_others = round(day_others / (len_programs - 3), 2)
+    else:
+        preference = {}
+        day1 = 0
+        day2 = 0
+        day3 = 0
+        day_others = 0
 
     more_than_3_pref = True if len(preference) >= 3 else False
     avg_part = avg_participation(user_data)
@@ -130,20 +140,21 @@ def user(usr):
     if int(avs.split(':')[0]) != 7 and int(avs.split(':')[0]) != 8:
         lifepattern_point = lifepattern_point - 10
 
-    total_score = int(round((int(suni_score) + int(lifepattern_point) + int(acttotal)) / 3))
+    total_score = int(
+        round((int(suni_score) + int(lifepattern_point) + int(acttotal)) / 3))
 
     return render_template('main.html', usr=usr, name=name,
-                            num_res=num_res, len_res=len_res,
-                            sorted_prob_res=sorted_prob_res, avg_prob_res=avg_prob_res,
-                            more_than_3_res_type=more_than_3_res_type,
-                            avg_res=avg_res, avg_len=avg_len, avg_prob=avg_prob,
-                            prob1=prob1, prob2=prob2, prob3=prob3,
-                            programs=sorted_program_days, len_programs=len_programs, program_days=program_days,
-                            day1=day1, day2=day2, day3=day3, day_others=day_others, preference=preference, more_than_3_pref=more_than_3_pref,
-                            total_programs=total_programs, avg_part=avg_part,
-                            suni_score=suni_score, conv_score=conv_score, program_score=program_score,
-                            exer=exer, exermean=exermean, exerMent=exerMent, zValueSc=zValueSc, goout=goout,
-                            gooutMean=gooutMean, zgraph=zgraph, zvaluemean = zvaluemean, zall = zall,  acttotal= acttotal,
-                            toilet=toilet, hobby=hobby, bm=bm, lm=lm, dm=dm, bs=bs, ls=ls, ds=ds,
-                            rmm=rmm, rms=rms, stm=stm, sts=sts, atm=atm, ats=ats, avs=avs,
-                            lifepattern_point=lifepattern_point, total_score=total_score)
+                           num_res=num_res, len_res=len_res,
+                           sorted_prob_res=sorted_prob_res, avg_prob_res=avg_prob_res,
+                           more_than_3_res_type=more_than_3_res_type,
+                           avg_res=avg_res, avg_len=avg_len, avg_prob=avg_prob,
+                           prob1=prob1, prob2=prob2, prob3=prob3,
+                           programs=sorted_program_days, len_programs=len_programs, program_days=program_days,
+                           day1=day1, day2=day2, day3=day3, day_others=day_others, preference=preference, more_than_3_pref=more_than_3_pref,
+                           total_programs=total_programs, avg_part=avg_part,
+                           suni_score=suni_score, conv_score=conv_score, program_score=program_score,
+                           exer=exer, exermean=exermean, exerMent=exerMent, zValueSc=zValueSc, goout=goout,
+                           gooutMean=gooutMean, zgraph=zgraph, zvaluemean=zvaluemean, zall=zall,  acttotal=acttotal,
+                           toilet=toilet, hobby=hobby, bm=bm, lm=lm, dm=dm, bs=bs, ls=ls, ds=ds,
+                           rmm=rmm, rms=rms, stm=stm, sts=sts, atm=atm, ats=ats, avs=avs,
+                           lifepattern_point=lifepattern_point, total_score=total_score)
