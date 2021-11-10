@@ -101,7 +101,11 @@
                                 </script>
                             </canvas>
                             <div class="stime">
-                                {{stm.split(':')[0]}}시 {{stm.split(':')[1]}}분 {{stm.split(':')[2]}}초
+                                {% if stm == 'No data' %}
+                                    주무신 기록이 없어요.
+                                {% else %}
+                                    {{stm.split(':')[0]}}시 {{stm.split(':')[1]}}분 {{stm.split(':')[2]}}초
+                                {% endif %}
                             </div>
                         </div>
                         <div class="item2">
@@ -114,7 +118,11 @@
                                 </script>
                             </canvas>
                             <div class="atime">
-                                {{atm.split(':')[0]}}시 {{atm.split(':')[1]}}분 {{atm.split(':')[2]}}초
+                                {% if atm == 'No data' %}
+                                    일어나신 기록이 없어요.
+                                {% else %}
+                                    {{atm.split(':')[0]}}시 {{atm.split(':')[1]}}분 {{atm.split(':')[2]}}초
+                                {% endif %}
                             </div>
                         </div>
                         <div class="item3">
@@ -125,7 +133,8 @@
                                 {% endif %}
                             </div>
                             <div class="sleepadvice">
-                                {% if avs.split(':')[0] == '0' or avs.split(':')[0] == '1' or avs.split(':')[0] == '2' or avs.split(':')[0] == '3' or avs.split(':')[0] == '4' or avs.split(':')[0] == '5' or avs.split(':')[0] == '6' %}
+                                {% if avs == 'No data' %}
+                                {% elif avs.split(':')[0] == '0' or avs.split(':')[0] == '1' or avs.split(':')[0] == '2' or avs.split(':')[0] == '3' or avs.split(':')[0] == '4' or avs.split(':')[0] == '5' or avs.split(':')[0] == '6' %}
                                     <b>수면시간이 너무 적어요!</b> 권장 수면시간은 7~8시간이에요!<br>
                                 {% elif avs.split(':')[0] == '7' or avs.split(':')[0] == '8' %}
                                     {{name}}님! 적절한 수면시간을 가지고 계세요!<br>
