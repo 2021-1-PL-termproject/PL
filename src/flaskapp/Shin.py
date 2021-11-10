@@ -1,6 +1,5 @@
 import pandas as pd
 import os
-from matplotlib import pyplot as plt
 import numpy as np
 
 
@@ -64,7 +63,6 @@ def zValue(id):
     out = data["State"].isin(["외출하기"])
     data = data[~out]
     Zcolumn = data['Z'].value_counts()
-    x = np.arange(4)
     zcolumn = Zcolumn.rename_axis('AA').reset_index(name='counts')
     if ((zcolumn['AA'] == "부동").any()):
         A = Zcolumn["부동"]
