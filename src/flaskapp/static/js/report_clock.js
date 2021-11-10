@@ -107,7 +107,7 @@ function drawTime(ctx, radius) {
   var awake_min = getawakeMin();
   var awake_sec = getawakeSec();
   var awake;
-  var breakfast_hr= getbreakfastHr()
+  var breakfast_hr = getbreakfastHr();
   var breakfast_min = getbreakfastMin();
   var breakfast_sec = getbreakfastSec();
   var breakfast;
