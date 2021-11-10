@@ -101,7 +101,11 @@
                                 </script>
                             </canvas>
                             <div class="stime">
-                                {{stm.split(':')[0]}}시 {{stm.split(':')[1]}}분 {{stm.split(':')[2]}}초
+                                {% if stm == 'No data' %}
+                                    주무신 기록이 없어요.
+                                {% else %}
+                                    {{stm.split(':')[0]}}시 {{stm.split(':')[1]}}분 {{stm.split(':')[2]}}초
+                                {% endif %}
                             </div>
                         </div>
                         <div class="item2">
@@ -114,7 +118,11 @@
                                 </script>
                             </canvas>
                             <div class="atime">
-                                {{atm.split(':')[0]}}시 {{atm.split(':')[1]}}분 {{atm.split(':')[2]}}초
+                                {% if atm == 'No data' %}
+                                    일어나신 기록이 없어요.
+                                {% else %}
+                                    {{atm.split(':')[0]}}시 {{atm.split(':')[1]}}분 {{atm.split(':')[2]}}초
+                                {% endif %}
                             </div>
                         </div>
                         <div class="item3">
@@ -125,7 +133,8 @@
                                 {% endif %}
                             </div>
                             <div class="sleepadvice">
-                                {% if avs.split(':')[0] == '0' or avs.split(':')[0] == '1' or avs.split(':')[0] == '2' or avs.split(':')[0] == '3' or avs.split(':')[0] == '4' or avs.split(':')[0] == '5' or avs.split(':')[0] == '6' %}
+                                {% if avs == 'No data' %}
+                                {% elif avs.split(':')[0] == '0' or avs.split(':')[0] == '1' or avs.split(':')[0] == '2' or avs.split(':')[0] == '3' or avs.split(':')[0] == '4' or avs.split(':')[0] == '5' or avs.split(':')[0] == '6' %}
                                     <b>수면시간이 너무 적어요!</b> 권장 수면시간은 7~8시간이에요!<br>
                                 {% elif avs.split(':')[0] == '7' or avs.split(':')[0] == '8' %}
                                     {{name}}님! 적절한 수면시간을 가지고 계세요!<br>
@@ -364,27 +373,41 @@
                             <div class="circle-container">
                                 <div class='center'>
                                     <canvas id="canvasreport" width="300" height="300">
-                                        <script type="text/javascript">
-                                            var sleep_hr = {{ stm.split(':')[0] }}
-                                            var sleep_min = {{ stm.split(':')[1] }}
-                                            var sleep_sec = {{ stm.split(':')[2] }}
-
-                                            var awake_hr = {{ atm.split(':')[0] }}
-                                            var awake_min = {{ atm.split(':')[1] }}
-                                            var awake_sec = {{ atm.split(':')[2] }}
-
-                                            var breakfast_hr = {{ bm.split(':')[0] }}
-                                            var breakfast_min = {{ bm.split(':')[1] }}
-                                            var breakfast_sec = {{ bm.split(':')[2] }}
-
-                                            var lunch_hr = {{ lm.split(':')[0] }}
-                                            var lunch_min = {{ lm.split(':')[1] }}
-                                            var lunch_sec = {{ lm.split(':')[2] }}
-
-                                            var dinner_hr = {{ dm.split(':')[0] }}
-                                            var dinner_min = {{ dm.split(':')[1] }}
-                                            var dinner_sec = {{ dm.split(':')[2] }}
-                                        </script>
+                                        {% if stm != 'No data' %}
+                                            <script type="text/javascript">
+                                                var sleep_hr = {{ stm.split(':')[0] }}
+                                                var sleep_min = {{ stm.split(':')[1] }}
+                                                var sleep_sec = {{ stm.split(':')[2] }}
+                                            </script>
+                                        {% endif %}
+                                        {% if atm != 'No data' %}
+                                            <script type="text/javascript">
+                                                var awake_hr = {{ atm.split(':')[0] }}
+                                                var awake_min = {{ atm.split(':')[1] }}
+                                                var awake_sec = {{ atm.split(':')[2] }}
+                                            </script>
+                                        {% endif %}
+                                        {% if bm != 'No data' %}
+                                            <script type="text/javascript">
+                                                var breakfast_hr = {{ bm.split(':')[0] }}
+                                                var breakfast_min = {{ bm.split(':')[1] }}
+                                                var breakfast_sec = {{ bm.split(':')[2] }}
+                                            </script>
+                                        {% endif %}
+                                        {% if lm != 'No data' %}
+                                            <script type="text/javascript">
+                                                var lunch_hr = {{ lm.split(':')[0] }}
+                                                var lunch_min = {{ lm.split(':')[1] }}
+                                                var lunch_sec = {{ lm.split(':')[2] }}
+                                            </script>
+                                        {% endif %}
+                                        {% if dm != 'No data' %}
+                                            <script type="text/javascript">
+                                                var dinner_hr = {{ dm.split(':')[0] }}
+                                                var dinner_min = {{ dm.split(':')[1] }}
+                                                var dinner_sec = {{ dm.split(':')[2] }}
+                                            </script>
+                                        {% endif %}
                                     </canvas>
                                 </div>
                                 <div class='deg315' style="transform: rotate(315deg) translate(13em) rotate(-315deg)">

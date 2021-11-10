@@ -137,8 +137,9 @@ def user(usr):
             dinner_point += (3 - int(ds.split(':')[0])) * 5
     lifepattern_point = int(sleep_point) + int(awake_point) + int(breakfast_point) + int(lunch_point) + int(
         dinner_point)
-    if int(avs.split(':')[0]) != 7 and int(avs.split(':')[0]) != 8:
-        lifepattern_point = lifepattern_point - 10
+    if avs != 'No data':
+        if int(avs.split(':')[0]) != 7 and int(avs.split(':')[0]) != 8:
+            lifepattern_point = lifepattern_point - 10
 
     total_score = int(
         round((int(suni_score) + int(lifepattern_point) + int(acttotal)) / 3))
