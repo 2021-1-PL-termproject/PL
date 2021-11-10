@@ -107,7 +107,7 @@ function drawTime(ctx, radius) {
   var awake_min = getawakeMin();
   var awake_sec = getawakeSec();
   var awake;
-  var breakfast_hr = getbreakfastHr();
+  var breakfast_hr= getbreakfastHr()
   var breakfast_min = getbreakfastMin();
   var breakfast_sec = getbreakfastSec();
   var breakfast;
@@ -127,30 +127,51 @@ function drawTime(ctx, radius) {
     (awake_hr * Math.PI) / 12 +
     (awake_min * Math.PI) / (12 * 60) +
     (awake_sec * Math.PI) / (12 * 3600);
-  for (num = sleep; num < awake; num += 0.01) {
-    drawHand(ctx, num, radius * 0.96, radius * 0.1);
+  if (typeof sleep !== "undefined") {
+    if (typeof awake !== "undefined") {
+      if (sleep > awake) {
+        for (num = sleep; num < 2 * Math.PI; num += 0.01) {
+          drawHand(ctx, num, radius * 0.96, radius * 0.1);
+        }
+        for (num = 0; num < awake; num += 0.01) {
+          drawHand(ctx, num, radius * 0.96, radius * 0.1);
+        }
+      } else {
+        for (num = sleep; num < awake; num += 0.01) {
+          drawHand(ctx, num, radius * 0.96, radius * 0.1);
+        }
+      }
+    }
   }
 
-  breakfast =
-    (breakfast_hr * Math.PI) / 12 +
-    (breakfast_min * Math.PI) / (12 * 60) +
-    (breakfast_sec * Math.PI) / (12 * 3600);
-  for (i = 1; i < 20; i++) {
-    drawHand(ctx, breakfast, radius * 0.95, radius * 0.1);
+  if (typeof breakfast_hr != "undefined") {
+    breakfast =
+      (breakfast_hr * Math.PI) / 12 +
+      (breakfast_min * Math.PI) / (12 * 60) +
+      (breakfast_sec * Math.PI) / (12 * 3600);
+    for (i = 1; i < 20; i++) {
+      drawHand(ctx, breakfast, radius * 0.95, radius * 0.1);
+    }
   }
-  lunch =
-    (lunch_hr * Math.PI) / 12 +
-    (lunch_min * Math.PI) / (12 * 60) +
-    (lunch_sec * Math.PI) / (12 * 3600);
-  for (i = 1; i < 20; i++) {
-    drawHand(ctx, lunch, radius * 0.95, radius * 0.1);
+
+  if (typeof lunch_hr != "undefined") {
+    lunch =
+      (lunch_hr * Math.PI) / 12 +
+      (lunch_min * Math.PI) / (12 * 60) +
+      (lunch_sec * Math.PI) / (12 * 3600);
+    for (i = 1; i < 20; i++) {
+      drawHand(ctx, lunch, radius * 0.95, radius * 0.1);
+    }
   }
-  dinner =
-    (dinner_hr * Math.PI) / 12 +
-    (dinner_min * Math.PI) / (12 * 60) +
-    (dinner_sec * Math.PI) / (12 * 3600);
-  for (i = 1; i < 20; i++) {
-    drawHand(ctx, dinner, radius * 0.95, radius * 0.1);
+
+  if (typeof dinner_hr != "undefined") {
+    dinner =
+      (dinner_hr * Math.PI) / 12 +
+      (dinner_min * Math.PI) / (12 * 60) +
+      (dinner_sec * Math.PI) / (12 * 3600);
+    for (i = 1; i < 20; i++) {
+      drawHand(ctx, dinner, radius * 0.95, radius * 0.1);
+    }
   }
 }
 

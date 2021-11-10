@@ -373,27 +373,41 @@
                             <div class="circle-container">
                                 <div class='center'>
                                     <canvas id="canvasreport" width="300" height="300">
-                                        <script type="text/javascript">
-                                            var sleep_hr = {{ stm.split(':')[0] }}
-                                            var sleep_min = {{ stm.split(':')[1] }}
-                                            var sleep_sec = {{ stm.split(':')[2] }}
-
-                                            var awake_hr = {{ atm.split(':')[0] }}
-                                            var awake_min = {{ atm.split(':')[1] }}
-                                            var awake_sec = {{ atm.split(':')[2] }}
-
-                                            var breakfast_hr = {{ bm.split(':')[0] }}
-                                            var breakfast_min = {{ bm.split(':')[1] }}
-                                            var breakfast_sec = {{ bm.split(':')[2] }}
-
-                                            var lunch_hr = {{ lm.split(':')[0] }}
-                                            var lunch_min = {{ lm.split(':')[1] }}
-                                            var lunch_sec = {{ lm.split(':')[2] }}
-
-                                            var dinner_hr = {{ dm.split(':')[0] }}
-                                            var dinner_min = {{ dm.split(':')[1] }}
-                                            var dinner_sec = {{ dm.split(':')[2] }}
-                                        </script>
+                                        {% if stm != 'No data' %}
+                                            <script type="text/javascript">
+                                                var sleep_hr = {{ stm.split(':')[0] }}
+                                                var sleep_min = {{ stm.split(':')[1] }}
+                                                var sleep_sec = {{ stm.split(':')[2] }}
+                                            </script>
+                                        {% endif %}
+                                        {% if atm != 'No data' %}
+                                            <script type="text/javascript">
+                                                var awake_hr = {{ atm.split(':')[0] }}
+                                                var awake_min = {{ atm.split(':')[1] }}
+                                                var awake_sec = {{ atm.split(':')[2] }}
+                                            </script>
+                                        {% endif %}
+                                        {% if bm != 'No data' %}
+                                            <script type="text/javascript">
+                                                var breakfast_hr = {{ bm.split(':')[0] }}
+                                                var breakfast_min = {{ bm.split(':')[1] }}
+                                                var breakfast_sec = {{ bm.split(':')[2] }}
+                                            </script>
+                                        {% endif %}
+                                        {% if lm != 'No data' %}
+                                            <script type="text/javascript">
+                                                var lunch_hr = {{ lm.split(':')[0] }}
+                                                var lunch_min = {{ lm.split(':')[1] }}
+                                                var lunch_sec = {{ lm.split(':')[2] }}
+                                            </script>
+                                        {% endif %}
+                                        {% if dm != 'No data' %}
+                                            <script type="text/javascript">
+                                                var dinner_hr = {{ dm.split(':')[0] }}
+                                                var dinner_min = {{ dm.split(':')[1] }}
+                                                var dinner_sec = {{ dm.split(':')[2] }}
+                                            </script>
+                                        {% endif %}
                                     </canvas>
                                 </div>
                                 <div class='deg315' style="transform: rotate(315deg) translate(13em) rotate(-315deg)">
